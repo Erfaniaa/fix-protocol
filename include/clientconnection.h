@@ -1,5 +1,5 @@
-#ifndef CONNECTION_H
-#define CONNECTION_H
+#ifndef CLIENT_CONNECTION_H
+#define CLIENT_CONNECTION_H
 
 #include <string>
 
