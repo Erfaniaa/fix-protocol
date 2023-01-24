@@ -2,6 +2,7 @@
 #include <cstring>
 #include <string>
 #include <stdexcept>
+#include <iostream>
 #include "../include/fixedstring.h"
 
 FixedString::FixedString() : size_(0) {
@@ -125,4 +126,16 @@ std::vector<FixedString> FixedString::split(const char& delimiter) {
 
 const char* FixedString::c_str() const {
 	return data_;
+}
+
+std::ostream& FixedString::operator<<(std::ostream& os) {
+	os << c_str();
+	return os;
+}
+
+std::istream& FixedString::operator>>(std::istream& is) {
+	char buffer[FixedString::MaxSize + 1];
+	is >> buffer;
+	*this = buffer;
+	return is;
 }

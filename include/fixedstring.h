@@ -5,6 +5,7 @@
 #include <cstring>
 #include <string>
 #include <vector>
+#include <iostream>
 
 class FixedString {
 public:
@@ -22,6 +23,8 @@ public:
 	FixedString& operator+(const FixedString& other);
 	std::vector<FixedString> FixedString::split(const char& delimiter);
 	const char* c_str() const;
+	std::ostream& operator<<(std::ostream& os);
+	std::istream& operator>>(std::istream& is);
 
 private:
 	static constexpr std::size_t MaxSize = 1024;
