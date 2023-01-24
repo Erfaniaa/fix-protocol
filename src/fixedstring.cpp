@@ -8,6 +8,28 @@ FixedString::FixedString() : size_(0) {
 	data_[0] = '\0';
 }
 
+FixedString::FixedString(const std::string& str) {
+	size_ = str.size();
+
+	if (size_ > MaxSize) {
+		size_ = MaxSize;
+	}
+
+	std::copy(str.begin(), str.begin() + size_, data_);
+	data_[size_] = '\0';
+}
+
+FixedString::FixedString(const char* str) {
+	size_ = 0;
+
+	while (str[size_] != '\0' && size_ < MaxSize) {
+		data_[size_] = str[size_];
+		++size_;
+    }
+
+    data_[size_] = '\0';  // Terminate the string with a null character. 
+}
+
 void FixedString::push_back(const char& value) {
 	if (size_ < MaxSize) {
 		data_[size_++] = value;

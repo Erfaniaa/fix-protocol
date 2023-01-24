@@ -10,6 +10,10 @@ class FixedString {
 public:
 	FixedString();
 
+	FixedString(const std::string& str);
+
+	FixedString(const char* str);
+
 	void push_back(const char& value);
 
 	void pop_back();
