@@ -7,15 +7,10 @@ template <typename Value>
 class LookupTable {
 public:
 	LookupTable(const Value& default_value);
-
-	void insert(int key, const Value& value);
-
-	Value& operator[](int key);
-
-	const Value& operator[](int key) const;
-
-	bool has_key(int key);
-
+	void insert(unsigned short key, const Value& value);
+	Value& operator[](unsigned short key);
+	const Value& operator[](unsigned short key) const;
+	bool has_key(unsigned short key);
 	std::size_t size();
 
 private:
