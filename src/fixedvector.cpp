@@ -1,4 +1,3 @@
-#include <cstddef>
 #include "../include/fixedvector.h"
 
 template <typename T>
