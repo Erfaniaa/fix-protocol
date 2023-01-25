@@ -1,8 +1,4 @@
 #include "../include/message.h"
-#include "../include/constants.h"
-#include "../include/fixedstring.h"
-#include "../include/fixedvector.h"
-#include "../include/field.h"
 
 Message::Message(FixedString message_type) : message_type_(message_type) {}
 
