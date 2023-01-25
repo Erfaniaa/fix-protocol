@@ -11,7 +11,7 @@ Message::Message(FixedString str) {
 	}
 
 	// Parse fields from remaining tokens
-	for (int i = 1; i < tokens.size(); ++i) {
+	for (int i = 0; i < tokens.size(); ++i) {
 		Field field(tokens[i]);
 		add_field(field);
   	}
