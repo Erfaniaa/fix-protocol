@@ -17,24 +17,6 @@ Message::Message(FixedString str) {
   	}
 }
 
-Message::Message(FixedString str) {
-	// Split string into tokens
-	FixedVector<FixedString> tokens;
-	std::istringstream iss(str.c_str());
-	for (std::string token; std::getline(iss, token, constants::SOH[0]); ) {
-		tokens.push_back(token);
-	}
-
-	// Set message type to first token
-	message_type_ = FixedString(tokens[0]);
-
-	// Parse fields from remaining tokens
-	for (int i = 1; i < tokens.size(); ++i) {
-		Field field(tokens[i]);
-		add_field(field);
-  	}
-}
-
 FixedString Message::message_type() const {
 	return message_type_;
 }
@@ -58,4 +40,20 @@ bool Message::has_tag(unsigned short tag) {
 
 FixedString Message::get_tag_value(unsigned short tag) {
 	return fields_lookup_table_[tag];
+}
+
+FixedString Message::get_checksum() {
+	FixedString serialized_message;
+	unsigned short last_index = serialized_message.size();
+	unsigned short sum = 0;
+	if (has_tag(10))
+		last_index -= 7;
+	for (unsigned short i = 0; i < last_index; i++)
+		sum = (sum + (unsigned short)serialized_message[i]) % 256;
+	if (sum < 10)
+		return FixedString("00") + FixedString(sum);
+	else if (sum < 100)
+		return FixedString("0") + FixedString(sum);
+	else
+		return FixedString(sum);
 }

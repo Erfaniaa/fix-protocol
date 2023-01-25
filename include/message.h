@@ -12,6 +12,7 @@ public:
 	FixedString serialize() const;
 	bool has_tag(unsigned short tag);
 	FixedString get_tag_value(unsigned short tag);
+	FixedString get_checksum();
 
 private:
 	FixedString message_type_;
