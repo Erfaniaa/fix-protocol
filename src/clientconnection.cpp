@@ -9,38 +9,38 @@
 #include "../include/clientconnection.h"
 
 
-void ClientConnection::openConnection() {
-	struct sockaddr_in serverAddress;
+void ClientConnection::open_connection() {
+	struct sockaddr_in server_address;
 
-	if ((newSocket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+	if ((new_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
 		std::cout << "Socket creation error" << std::endl;
 		return;
 	}
 
-	serverAddress.sin_family = AF_INET;
-	serverAddress.sin_port = htons(port);
+	server_address.sin_family = AF_INET;
+	server_address.sin_port = htons(port);
 
-	if (inet_pton(AF_INET, host.c_str(), &serverAddress.sin_addr) <= 0) {
+	if (inet_pton(AF_INET, host.c_str(), &server_address.sin_addr) <= 0) {
 		std::cout << "Invalid address/Address not supported error" << std::endl;
 		return;
 	}
 
-	if ((clientFD = connect(newSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress))) < 0) {
+	if ((client_fd = connect(new_socket, (struct sockaddr*)&server_address, sizeof(server_address))) < 0) {
 		std::cout << "Connection failed error" << std::endl;
 		return;
 	}
 }
 
-void ClientConnection::closeConnection() {
-	close(clientFD);
+void ClientConnection::close_connection() {
+	close(client_fd);
 }
 
-void ClientConnection::sendMessage(std::string message) {
-	send(newSocket, message.c_str(), strlen(message.c_str()), 0);
+void ClientConnection::send_message(FixedString message) {
+	send(new_socket, message.c_str(), message.size(), 0);
 }
 
-std::string ClientConnection::receiveMessage() {
-	char buffer[1024] = { 0 };
-	read(newSocket, buffer, 1024);
+FixedString ClientConnection::receive_message() {
+	char buffer[constants::MAX_MESSAGE_LENGTH] = { 0 };
+	read(new_socket, buffer, constants::MAX_MESSAGE_LENGTH);
 	return buffer;
 }
