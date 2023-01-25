@@ -22,9 +22,25 @@ FixedString::FixedString(const char* str) {
 	while (str[size_] != '\0' && size_ < kMaxSize) {
 		data_[size_] = str[size_];
 		++size_;
-    }
+	}
 
-    data_[size_] = '\0';  // Terminate the string with a null character. 
+	data_[size_] = '\0';  // Terminate the string with a null character. 
+}
+
+FixedString::FixedString(unsigned short x) {
+	std::stringstream ss;
+	std::string str;
+	ss << x;
+	ss >> str;
+	
+	size_ = str.size();
+
+	if (size_ > kMaxSize) {
+		size_ = kMaxSize;
+	}
+
+	std::copy(str.begin(), str.begin() + size_, data_);
+	data_[size_] = '\0';
 }
 
 void FixedString::push_back(const char& value) {
@@ -111,13 +127,13 @@ std::vector<FixedString> FixedString::split(const char& delimiter) {
 		} else {
 			current.push_back(data_[i]);
 		}
-    }
+	}
 
-    if (current.size() > 0) {  // Add the last element if it exists 
-        result.push_back(current); 
-    }
+	if (current.size() > 0) {  // Add the last element if it exists 
+		result.push_back(current); 
+	}
 
-    return result;  // Return the vector of FixedStrings 
+	return result;  // Return the vector of FixedStrings 
 }
 
 const char* FixedString::c_str() const {

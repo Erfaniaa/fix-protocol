@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <sstream>
 #include <boost/array.hpp>
 #include "../include/constants.h"
 
@@ -14,6 +15,7 @@ public:
 	FixedString();
 	FixedString(const std::string& str);
 	FixedString(const char* str);
+	FixedString(unsigned short x);
 	void push_back(const char& value);
 	void pop_back();
 	std::size_t size() const;
