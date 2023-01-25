@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <boost/array.hpp>
+#include "../include/constants.h"
 
 class FixedString {
 public:
@@ -23,13 +25,14 @@ public:
 	FixedString& operator+(const FixedString& other);
 	std::vector<FixedString> FixedString::split(const char& delimiter);
 	const char* c_str() const;
+	boost::array<char, constants::MAX_MESSAGE_LENGTH> to_boost_array() const;
 	std::ostream& operator<<(std::ostream& os);
 	std::istream& operator>>(std::istream& is);
 
 private:
-	static constexpr std::size_t MaxSize = 1024;
+	static constexpr std::size_t kMaxSize = constants::MAX_MESSAGE_LENGTH;
 	std::size_t size_;
-	char data_[MaxSize + 1];
+	char data_[kMaxSize + 1];
 };
 
 #endif
