@@ -55,6 +55,12 @@ namespace constants {
 
 	// Delimiter
 	const FixedString SOH = "\x01";
+
+	// Socket
+	const unsigned short PORT = 5555;
+
+	// Messages length
+	const unsigned short MAX_MESSAGE_LENGTH = 256;
 }
 
 #endif
