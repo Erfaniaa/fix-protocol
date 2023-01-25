@@ -2,6 +2,7 @@
 #define LOOKUP_TABLE_H
 
 #include <cstddef>
+#include "../include/constants.h"
 
 template <typename Value>
 class LookupTable {
@@ -14,9 +15,9 @@ public:
 	std::size_t size();
 
 private:
-	static constexpr std::size_t MaxSize = 1024;  
+	static constexpr std::size_t kMaxSize = constants::MAX_MESSAGE_LENGTH;  
 	std::size_t size_;  
-	Value values_[MaxSize];
+	Value values_[kMaxSize];
 	Value default_value_;
 };
 
