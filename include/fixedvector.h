@@ -15,6 +15,7 @@ public:
     const T& operator[](std::size_t index) const;
 	bool operator==(const FixedVector<T>& other) const;
 	FixedVector<T>& operator=(const FixedVector<T>& other) const;
+    void clear();
 
 private:
     static constexpr std::size_t kMaxSize = constants::MAX_MESSAGE_LENGTH;

@@ -57,3 +57,8 @@ FixedVector<T>& FixedVector<T>::operator=(const FixedVector<T>& other) const {
 
 	return this; 
 }
+
+template <typename T> 
+void FixedVector<T>::clear() {
+	size_ = 0;
+}
