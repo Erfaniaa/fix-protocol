@@ -1,8 +1,3 @@
-#include <cstddef>
-#include <cstring>
-#include <string>
-#include <stdexcept>
-#include <iostream>
 #include "../include/fixedstring.h"
 
 FixedString::FixedString() : size_(0) {
@@ -12,8 +7,8 @@ FixedString::FixedString() : size_(0) {
 FixedString::FixedString(const std::string& str) {
 	size_ = str.size();
 
-	if (size_ > MaxSize) {
-		size_ = MaxSize;
+	if (size_ > kMaxSize) {
+		size_ = kMaxSize;
 	}
 
 	std::copy(str.begin(), str.begin() + size_, data_);
@@ -23,7 +18,7 @@ FixedString::FixedString(const std::string& str) {
 FixedString::FixedString(const char* str) {
 	size_ = 0;
 
-	while (str[size_] != '\0' && size_ < MaxSize) {
+	while (str[size_] != '\0' && size_ < kMaxSize) {
 		data_[size_] = str[size_];
 		++size_;
     }
@@ -32,7 +27,7 @@ FixedString::FixedString(const char* str) {
 }
 
 void FixedString::push_back(const char& value) {
-	if (size_ < MaxSize) {
+	if (size_ < kMaxSize) {
 		data_[size_++] = value;
 		data_[size_] = '\0';
 	}
@@ -60,7 +55,7 @@ const char& FixedString::operator[](std::size_t index) const {
 FixedString& FixedString::operator=(const char* str) {
 	size_ = 0;
 	std::size_t len = std::strlen(str);
-	for (std::size_t i = 0; i < len && i < MaxSize; ++i) {
+	for (std::size_t i = 0; i < len && i < kMaxSize; ++i) {
 		data_[i] = str[i];
 		++size_;
 	}
@@ -69,7 +64,7 @@ FixedString& FixedString::operator=(const char* str) {
 }
 
 void FixedString::operator=(const std::string& str) {
-	if (str.size() > MaxSize) {
+	if (str.size() > kMaxSize) {
 		throw std::length_error("String exceeds maximum size of FixedString");
 	}
 
@@ -91,7 +86,7 @@ bool FixedString::operator==(const FixedString& other) const {
 }
 
 FixedString& FixedString::operator+(const FixedString& other) {
-	if (size_ + other.size_ > MaxSize) {
+	if (size_ + other.size_ > kMaxSize) {
 		throw std::length_error("FixedString length exceeded");
 	}
 
@@ -128,13 +123,21 @@ const char* FixedString::c_str() const {
 	return data_;
 }
 
+boost::array<char, constants::MAX_MESSAGE_LENGTH> FixedString::to_boost_array() const {
+	boost::array<char, constants::MAX_MESSAGE_LENGTH> arr;
+	std::copy(data_, data_ + size_, arr.begin());
+	arr[size_] = '\0';
+
+	return arr;
+}
+
 std::ostream& FixedString::operator<<(std::ostream& os) {
 	os << c_str();
 	return os;
 }
 
 std::istream& FixedString::operator>>(std::istream& is) {
-	char buffer[FixedString::MaxSize + 1];
+	char buffer[kMaxSize + 1];
 	is >> buffer;
 	*this = buffer;
 	return is;
