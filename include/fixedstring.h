@@ -28,6 +28,7 @@ public:
 	boost::array<char, constants::MAX_MESSAGE_LENGTH> to_boost_array() const;
 	std::ostream& operator<<(std::ostream& os);
 	std::istream& operator>>(std::istream& is);
+	void clear();
 
 private:
 	static constexpr std::size_t kMaxSize = constants::MAX_MESSAGE_LENGTH;

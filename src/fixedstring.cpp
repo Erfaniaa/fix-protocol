@@ -1,5 +1,6 @@
 #include "../include/fixedstring.h"
 
+
 FixedString::FixedString() : size_(0) {
 	data_[0] = '\0';
 }
@@ -141,4 +142,8 @@ std::istream& FixedString::operator>>(std::istream& is) {
 	is >> buffer;
 	*this = buffer;
 	return is;
+}
+
+void FixedString::clear() {
+	size_ = 0;
 }
