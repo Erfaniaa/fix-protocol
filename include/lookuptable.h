@@ -4,21 +4,21 @@
 #include <cstddef>
 #include "../include/constants.h"
 
-template <typename Value>
+template <typename T>
 class LookupTable {
 public:
-	LookupTable(const Value& default_value);
-	void insert(unsigned short key, const Value& value);
-	Value& operator[](unsigned short key);
-	const Value& operator[](unsigned short key) const;
+	LookupTable(const T& default_value);
+	void insert(unsigned short key, const T& value);
+	T& operator[](unsigned short key);
+	const T& operator[](unsigned short key) const;
 	bool has_key(unsigned short key);
 	std::size_t size();
 
 private:
 	static constexpr std::size_t kMaxSize = constants::MAX_MESSAGE_LENGTH;  
 	std::size_t size_;  
-	Value values_[kMaxSize];
-	Value default_value_;
+	T values_[kMaxSize];
+	T default_value_;
 };
 
 #endif
