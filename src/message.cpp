@@ -47,7 +47,7 @@ void Message::add_field(const Field& field) {
 FixedString Message::serialize() const {
 	FixedString serialized_message;
 	for (unsigned short i = 0; i < fields_fixed_vector_.size(); i++) {
-		serialized_message = serialized_message + FixedString(std::to_string(fields_[i].tag())) + FixedString("=") + fields_[i].value() + constants::SOH;
+		serialized_message = serialized_message + FixedString(std::to_string(fields_fixed_vector_[i].tag())) + FixedString("=") + fields_fixed_vector_[i].value() + constants::SOH;
 	}
 	return serialized_message;
 }
