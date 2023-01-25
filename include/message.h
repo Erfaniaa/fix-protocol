@@ -3,14 +3,15 @@
 #include "fixedvector.h"
 #include "field.h"
 
-class Message {
+class Message
+{
 public:
-	Message(FixedString message_type);
+	Message(FixedString str);
 	FixedString message_type() const;
-	void add_field(const Field& field);
+	void add_field(const Field &field);
 	FixedString serialize() const;
 
 private:
-  FixedString message_type_;
-  FixedVector<Field> fields_;
+	FixedString message_type_;
+	FixedVector<Field> fields_;
 };

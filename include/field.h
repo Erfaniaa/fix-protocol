@@ -1,11 +1,15 @@
 #ifndef FIELD_H
 #define FIELD_H
 
+#include <sstream>
+#include <string>
+#include "fixedvector.h"
 #include "fixedstring.h"
 
 class Field {
 public:
 	Field(unsigned short tag, FixedString value);
+	Field(FixedString str);
 	unsigned short tag() const;
 	FixedString value() const;
 
