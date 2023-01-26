@@ -26,6 +26,10 @@ void Message::add_field(const Field& field) {
 	fields_lookup_table_[field.tag()] = field.value();
 }
 
+void Message::add_field(unsigned short tag, FixedString value) {
+	add_field(Field(tag, value));
+}
+
 FixedString Message::serialize() const {
 	FixedString serialized_message;
 	for (unsigned short i = 0; i < fields_fixed_vector_.size(); i++) {

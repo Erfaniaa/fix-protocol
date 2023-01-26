@@ -9,6 +9,7 @@ public:
 	Message(FixedString str);
 	FixedString message_type() const;
 	void add_field(const Field &field);
+	void add_field(unsigned short tag, FixedString value);
 	FixedString serialize() const;
 	bool has_tag(unsigned short tag);
 	FixedString get_tag_value(unsigned short tag);
