@@ -44,3 +44,49 @@ Message* MessageFactory::CreateReject(unsigned short ref_seq_num, FixedString re
 	msg->add_field(constants::REF_MSG_TYPE, ref_msg_type);
 	return msg;
 }
+
+Message* MessageFactory::CreateNewOrderSingle(FixedString clordid, FixedString symbol, FixedString side, int orderQty, 
+											  FixedString ordType, double price, FixedString timeInForce, 
+										      FixedString orderCapacity, FixedString orderRestattribs) {
+    Message* msg = new Message();
+	msg->add_field(constants::MSG_TYPE, constants::NEW_ORDER_SINGLE);
+	msg->add_field(constants::CLORDID, clordid);
+	msg->add_field(constants::SYMBOL, symbol);
+	msg->add_field(constants::SIDE, side);
+	msg->add_field(constants::ORDER_QTY, std::to_string(orderQty));
+	msg->add_field(constants::ORD_TYPE, ordType);
+	msg->add_field(constants::PRICE, std::to_string(price));
+	msg->add_field(constants::TIME_IN_FORCE, timeInForce);
+	msg->add_field(constants::ORDER_CAPACITY, orderCapacity);
+	msg->add_field(constants::ORDER_RESTATTRIBS, orderRestattribs);
+    return msg;
+}
+
+Message* MessageFactory::CreateSequenceReset(unsigned short new_seq_num, bool gap_fill_flag) {
+	Message* msg = new Message();
+	msg->add_field(constants::MSG_TYPE, constants::SEQUENCE_RESET);
+	msg->add_field(constants::NEW_SEQ_NUM, std::to_string(new_seq_num));
+	if (gap_fill_flag) {
+		msg->add_field(constants::GAP_FILL_FLAG, "Y");
+	}
+	return msg;
+}
+
+Message* MessageFactory::CreateOrderCancelRequest(unsigned short orig_clord_id, unsigned short order_id, unsigned short symbol, unsigned short side) {
+	Message* msg = new Message();
+	msg->add_field(constants::MSG_TYPE, constants::ORDER_CANCEL_REQUEST);
+	msg->add_field(constants::ORIG_CLORD_ID, std::to_string(orig_clord_id));
+	msg->add_field(constants::ORDER_ID, std::to_string(order_id));
+	msg->add_field(constants::SYMBOL, std::to_string(symbol));
+	msg->add_field(constants::SIDE, std::to_string(side));
+	return msg;
+}
+
+Message* MessageFactory::CreateOrderCancelReject(unsigned short ref_seq_num, FixedString clord_id, FixedString orig_clord_id, FixedString text) {
+	Message* msg = new Message();
+	msg->add_field(constants::REF_SEQ_NUM, std::to_string(ref_seq_num));
+	msg->add_field(constants::CLORDID, clord_id);
+	msg->add_field(constants::ORIG_CLORD_ID, orig_clord_id);
+	msg->add_field(constants::TEXT, text);
+	return msg;
+}
