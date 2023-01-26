@@ -52,6 +52,19 @@ namespace constants {
 	const unsigned short ORDER_QTY_TYPE_ALL_EXECUTED = 857;
 	const unsigned short ORDER_QTY_TYPE_PARTIALLY_EXECUTED = 858;
 	const unsigned short ORDER_QTY_TYPE_CANCELLED = 859;
+	const unsigned short ENCRYPT_METHOD = 98;
+	const unsigned short HEART_BT_INT = 108;
+	const unsigned short RESET_SEQ_NUM_FLAG = 141;
+	const unsigned short TEST_REQ_ID = 112;
+	const unsigned short BEGIN_SEQ_NUM = 7;
+	const unsigned short END_SEQ_NUM = 16;
+	const unsigned short REF_SEQ_NUM = 45;
+	const unsigned short REF_TAG_ID = 371;
+	const unsigned short REF_MSG_TYPE = 372;
+
+	// Sender and receiver
+	const FixedString SENDER_COMP_ID_VALUE = "1";
+	const FixedString TARGET_COMP_ID_VALUE = "2";
 
 	// Delimiter
 	const FixedString SOH = "\x01";
