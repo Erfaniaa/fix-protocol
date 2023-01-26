@@ -15,7 +15,7 @@ public:
 	std::size_t size();
 
 private:
-	static constexpr std::size_t kMaxSize = constants::MAX_MESSAGE_LENGTH;  
+	static constexpr std::size_t kMaxSize = constants::MAX_TAGS_COUNT;  
 	std::size_t size_;  
 	FixedString values_[kMaxSize];
 	FixedString default_value_ = "-1";

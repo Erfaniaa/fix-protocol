@@ -78,6 +78,9 @@ namespace constants {
 
 	// Messages length
 	const unsigned short MAX_MESSAGE_LENGTH = 256;
+
+	// Tags count
+	const unsigned short MAX_TAGS_COUNT = 1024;
 }
 
 #endif
