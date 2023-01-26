@@ -61,6 +61,10 @@ namespace constants {
 	const unsigned short REF_SEQ_NUM = 45;
 	const unsigned short REF_TAG_ID = 371;
 	const unsigned short REF_MSG_TYPE = 372;
+	const unsigned short SEQUENCE_RESET = 141;
+	const unsigned short NEW_SEQ_NUM = 36;
+	const unsigned short GAP_FILL_FLAG = 123;
+	const unsigned short ORIG_CLORD_ID = 41;
 
 	// Sender and receiver
 	const FixedString SENDER_COMP_ID_VALUE = "1";
