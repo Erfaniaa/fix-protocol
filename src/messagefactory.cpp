@@ -30,17 +30,17 @@ Message* MessageFactory::CreateTestRequest() {
 	return msg;
 }
 
-Message* MessageFactory::CreateResendRequest(unsigned short beginSeqNum, unsigned short endSeqNum) {
+Message* MessageFactory::CreateResendRequest(unsigned short begin_seq_num, unsigned short end_seq_num) {
 	Message* msg = new Message();
-	msg->add_field(constants::BEGIN_SEQ_NUM, std::to_string(beginSeqNum));
-	msg->add_field(constants::END_SEQ_NUM, std::to_string(endSeqNum));
+	msg->add_field(constants::BEGIN_SEQ_NUM, std::to_string(begin_seq_num));
+	msg->add_field(constants::END_SEQ_NUM, std::to_string(end_seq_num));
 	return msg;
 }
 
-Message* MessageFactory::CreateReject(unsigned short refSeqNum, FixedString refTagId, FixedString refMsgType) {
+Message* MessageFactory::CreateReject(unsigned short ref_seq_num, FixedString ref_tag_id, FixedString ref_msg_type) {
 	Message* msg = new Message();
-	msg->add_field(constants::REF_SEQ_NUM, std::to_string(refSeqNum));
-	msg->add_field(constants::REF_TAG_ID, refTagId);
-	msg->add_field(constants::REF_MSG_TYPE, refMsgType);
+	msg->add_field(constants::REF_SEQ_NUM, std::to_string(ref_seq_num));
+	msg->add_field(constants::REF_TAG_ID, ref_tag_id);
+	msg->add_field(constants::REF_MSG_TYPE, ref_msg_type);
 	return msg;
 }
