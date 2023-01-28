@@ -188,3 +188,15 @@ void FixedString::new_data_if_null() {
 		data_[0] = '\0';
 	}
 }
+
+FixedString FixedString::get_checksum() {
+	unsigned short sum = 0;
+	for (unsigned short i = 0; i < size(); i++)
+		sum = (sum + (unsigned short)data_[i]) % 256;
+	if (sum < 10)
+		return FixedString("00") + FixedString(sum);
+	else if (sum < 100)
+		return FixedString("0") + FixedString(sum);
+	else
+		return FixedString(sum);
+}

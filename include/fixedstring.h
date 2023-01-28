@@ -32,6 +32,7 @@ public:
 	std::ostream& operator<<(std::ostream& os);
 	std::istream& operator>>(std::istream& is);
 	void clear();
+	FixedString get_checksum();
 
 private:
 	void new_data_if_null();
