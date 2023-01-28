@@ -13,6 +13,7 @@
 class FixedString {
 public:
 	FixedString();
+	~FixedString();
 	FixedString(const std::string& str);
 	FixedString(const char* str);
 	FixedString(unsigned short x);
@@ -24,7 +25,7 @@ public:
 	FixedString& operator=(const char* str);
 	void FixedString::operator=(const std::string& str);
 	bool operator==(const FixedString& other) const;
-	FixedString& operator+(const FixedString& other);
+	FixedString operator+(const FixedString& other);
 	std::vector<FixedString> FixedString::split(const char& delimiter);
 	const char* c_str() const;
 	boost::array<char, constants::MAX_MESSAGE_LENGTH> to_boost_array() const;
@@ -33,9 +34,10 @@ public:
 	void clear();
 
 private:
+	void new_data_if_null();
 	static constexpr std::size_t kMaxSize = constants::MAX_MESSAGE_LENGTH;
 	std::size_t size_;
-	char data_[kMaxSize + 1];
+	char* data_ = NULL;
 };
 
 #endif

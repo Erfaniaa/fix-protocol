@@ -1,11 +1,16 @@
 #include "../include/fixedstring.h"
 
 
-FixedString::FixedString() : size_(0) {
-	data_[0] = '\0';
+FixedString::FixedString() : size_(0) {}
+
+FixedString::~FixedString() {
+	if (data_ != NULL)
+		delete data_;
 }
 
 FixedString::FixedString(const std::string& str) {
+	new_data_if_null();
+
 	size_ = str.size();
 
 	if (size_ > kMaxSize) {
@@ -17,6 +22,8 @@ FixedString::FixedString(const std::string& str) {
 }
 
 FixedString::FixedString(const char* str) {
+	new_data_if_null();
+
 	size_ = 0;
 
 	while (str[size_] != '\0' && size_ < kMaxSize) {
@@ -28,6 +35,8 @@ FixedString::FixedString(const char* str) {
 }
 
 FixedString::FixedString(unsigned short x) {
+	new_data_if_null();
+
 	std::stringstream ss;
 	std::string str;
 	ss << x;
@@ -44,6 +53,8 @@ FixedString::FixedString(unsigned short x) {
 }
 
 void FixedString::push_back(const char& value) {
+	new_data_if_null();
+
 	if (size_ < kMaxSize) {
 		data_[size_++] = value;
 		data_[size_] = '\0';
@@ -70,6 +81,8 @@ const char& FixedString::operator[](std::size_t index) const {
 }
 
 FixedString& FixedString::operator=(const char* str) {
+	new_data_if_null();
+
 	size_ = 0;
 	std::size_t len = std::strlen(str);
 	for (std::size_t i = 0; i < len && i < kMaxSize; ++i) {
@@ -81,6 +94,8 @@ FixedString& FixedString::operator=(const char* str) {
 }
 
 void FixedString::operator=(const std::string& str) {
+	new_data_if_null();
+
 	if (str.size() > kMaxSize) {
 		throw std::length_error("String exceeds maximum size of FixedString");
 	}
@@ -102,18 +117,20 @@ bool FixedString::operator==(const FixedString& other) const {
 	return true;
 }
 
-FixedString& FixedString::operator+(const FixedString& other) {
+FixedString FixedString::operator+(const FixedString& other) {
+	FixedString new_fixed_string("");
+
+	new_fixed_string = *this;
+
 	if (size_ + other.size_ > kMaxSize) {
 		throw std::length_error("FixedString length exceeded");
 	}
 
 	for (std::size_t i = 0; i < other.size_; ++i) {
-		data_[size_ + i] = other.data_[i];
+		new_fixed_string.push_back(other.data_[i]);
 	}
 
-	size_ += other.size_;
-
-	return *this;
+	return new_fixed_string;
 }
 
 std::vector<FixedString> FixedString::split(const char& delimiter) {
@@ -162,4 +179,12 @@ std::istream& FixedString::operator>>(std::istream& is) {
 
 void FixedString::clear() {
 	size_ = 0;
+	data_[0] = '\0';
+}
+
+void FixedString::new_data_if_null() {
+	if (data_ == NULL) {
+		data_ = new char[kMaxSize + 1];
+		data_[0] = '\0';
+	}
 }
