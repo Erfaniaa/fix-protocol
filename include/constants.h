@@ -74,6 +74,7 @@ namespace constants {
 	const FixedString SOH = "\x01";
 
 	// Socket
+	const FixedString HOST = "127.0.0.1";
 	const unsigned short PORT = 5555;
 
 	// Messages length
