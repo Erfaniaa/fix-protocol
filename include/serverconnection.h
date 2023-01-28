@@ -20,7 +20,7 @@ public:
 	void send_message(FixedString message);
 	FixedString receive_message();
 private:
-	const int port = 5555;
+	const int port = constants::PORT;
 	int new_socket = 0, server_fd = 0;
 };
 
