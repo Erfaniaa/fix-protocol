@@ -4,6 +4,8 @@
 #include <boost/asio.hpp>
 #include "../include/fixedstring.h"
 #include "../include/constants.h"
+#include "../include/logger.h"
+
 
 class BoostClientConnection {
 
@@ -18,6 +20,7 @@ private:
 	const int port = constants::PORT;
 	boost::asio::ip::tcp::socket new_socket;
 	boost::asio::detail::socket_type client_fd = 0;
+	Logger logger_;
 };
 
 #endif
