@@ -16,7 +16,7 @@ void BoostClientConnection::open_connection() {
 		boost::asio::connect(new_socket, endpoint_iterator);
 
 	} catch (std::exception& e) {
-		logger_.log_error("Connection failed error");
+		Logger().log_error("Connection failed error");
 	}
 	
 	client_fd = new_socket.native_handle();  // get the file descriptor for the socket 

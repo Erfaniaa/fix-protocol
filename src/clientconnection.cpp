@@ -13,7 +13,7 @@ void ClientConnection::open_connection() {
 	struct sockaddr_in server_address;
 
 	if ((new_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-		logger_.log_error("Socket creation error");
+		Logger().log_error("Socket creation error");
 		return;
 	}
 
@@ -21,12 +21,12 @@ void ClientConnection::open_connection() {
 	server_address.sin_port = htons(port);
 
 	if (inet_pton(AF_INET, host.c_str(), &server_address.sin_addr) <= 0) {
-		logger_.log_error("Invalid address/Address not supported error");
+		Logger().log_error("Invalid address/Address not supported error");
 		return;
 	}
 
 	if ((client_fd = connect(new_socket, (struct sockaddr*)&server_address, sizeof(server_address))) < 0) {
-		logger_.log_error("Connection failed error");
+		Logger().log_error("Connection failed error");
 		return;
 	}
 }

@@ -7,12 +7,12 @@ void ServerConnection::open_connection() {
 	int address_len = sizeof(address);
 
 	if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-		logger_.log_error("socket failed error");
+		Logger().log_error("socket failed error");
 		return;
 	}
 
 	if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
-		logger_.log_error("setsockopt error");
+		Logger().log_error("setsockopt error");
 		return;
 	}
 	address.sin_family = AF_INET;
@@ -20,17 +20,17 @@ void ServerConnection::open_connection() {
 	address.sin_port = htons(port);
 
 	if (bind(server_fd, (struct sockaddr*)&address, sizeof(address)) < 0) {
-		logger_.log_error("bind failed");
+		Logger().log_error("bind failed");
 		return;
 	}
 
 	if (listen(server_fd, 3) < 0) {
-		logger_.log_error("listen error");
+		Logger().log_error("listen error");
 		return;
 	}
 
 	if ((new_socket = accept(server_fd, (struct sockaddr*)&address, (socklen_t*)&address_len)) < 0) {
-		logger_.log_error("accept connection error");
+		Logger().log_error("accept connection error");
 		return;
 	}
 }
