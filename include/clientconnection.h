@@ -3,6 +3,8 @@
 
 #include "../include/fixedstring.h"
 #include "../include/constants.h"
+#include "../include/logger.h"
+
 
 class ClientConnection {
 public:
@@ -14,6 +16,7 @@ private:
 	const FixedString host = constants::HOST;
 	const int port = constants::PORT;
 	int new_socket = 0, client_fd = 0;
+	Logger logger_;
 };
 
 #endif
