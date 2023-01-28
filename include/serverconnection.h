@@ -22,7 +22,6 @@ public:
 private:
 	const int port = 5555;
 	int new_socket = 0, server_fd = 0;
-	Logger logger_;
 };
 
 #endif
