@@ -20,7 +20,6 @@ private:
 	const int port = constants::PORT;
 	boost::asio::ip::tcp::socket new_socket;
 	boost::asio::detail::socket_type client_fd = 0;
-	Logger logger_;
 };
 
 #endif

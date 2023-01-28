@@ -16,7 +16,6 @@ private:
 	const FixedString host = constants::HOST;
 	const int port = constants::PORT;
 	int new_socket = 0, client_fd = 0;
-	Logger logger_;
 };
 
 #endif
