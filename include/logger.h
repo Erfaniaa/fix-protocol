@@ -1,3 +1,6 @@
+#ifndef LOGGER_H
+#define LOGGER
+
 #include <string>
 #include <iostream>
 #include "fixedstring.h"
@@ -16,3 +19,5 @@ public:
 	static void log_warning(std::string str);
 	static void log_warning(char* s);
 };
+
+#endif
