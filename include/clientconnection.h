@@ -2,6 +2,7 @@
 #define CLIENT_CONNECTION_H
 
 #include "../include/fixedstring.h"
+#include "../include/constants.h"
 
 class ClientConnection {
 public:
@@ -10,8 +11,8 @@ public:
 	void send_message(FixedString message);
 	FixedString receive_message();
 private:
-	const FixedString host = "127.0.0.1";
-	const int port = 5555;
+	const FixedString host = constants::HOST;
+	const int port = constants::PORT;
 	int new_socket = 0, client_fd = 0;
 };
 

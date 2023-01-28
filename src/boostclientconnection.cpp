@@ -1,6 +1,3 @@
-#include <iostream>
-#include <string>
-#include <boost/asio.hpp>
 #include "../include/boostclientconnection.h"
 
 
@@ -9,7 +6,7 @@ void BoostClientConnection::open_connection() {
 
 	// Get a list of endpoints corresponding to the server name. 
 	boost::asio::ip::tcp::resolver resolver(io_service);
-	boost::asio::ip::tcp::resolver::query query(host, std::to_string(port));
+	boost::asio::ip::tcp::resolver::query query(host.c_str(), std::to_string(port));
 	boost::asio::ip::tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
 
 	// Try each endpoint until we successfully establish a connection. 
@@ -29,11 +26,11 @@ void BoostClientConnection::close_connection() {
      new_socket.close();   // closes the socket connection
 }  
 
-void BoostClientConnection::send_message(std::string message) {   // send a message over the socket connection
- 	boost::asio::write(new_socket, boost::asio::buffer(message));
+void BoostClientConnection::send_message(FixedString message) {   // send a message over the socket connection
+ 	boost::asio::write(new_socket, boost::asio::buffer(message.to_boost_array()));
 }   
 
-std::string BoostClientConnection::receive_message() {
+FixedString BoostClientConnection::receive_message() {
 	// receive a message from the socket connection
 	char buffer[1024];
 	boost::system::error_code error;
@@ -42,5 +39,5 @@ std::string BoostClientConnection::receive_message() {
 		return "";
 	else if (error)
 		throw boost::system::system_error(error);
-	return std::string(buffer, length);
+	return buffer;
 }
