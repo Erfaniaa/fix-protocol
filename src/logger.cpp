@@ -1,40 +1,38 @@
 #include "../include/logger.h"
 
 
-Logger::Logger(std::string filename) : file_(filename) {}
+Logger::Logger() {}
 	
-Logger::~Logger() {
-	file_.close();
-}
+Logger::~Logger() {}
 	
 void Logger::log(std::string str) {
-	file_ << str << std::endl;
+	std::cout << str << std::endl;
 }
 
 void Logger::log(char* s) {
-	file_ << s << std::endl;
+	std::cout << s << std::endl;
 }
 	
 void Logger::log_error(std::string str) {
-	file_ << "Error: " << str << std::endl;
+	std::cout << "Error: " << str << std::endl;
 }
 
 void Logger::log_error(char* s) {
-	file_ << "Error: " << s << std::endl;
+	std::cout << "Error: " << s << std::endl;
 }
 	
 void Logger::log_info(std::string str) {
-	file_ << "Info: " << str << std::endl;
+	std::cout << "Info: " << str << std::endl;
 }
 
 void Logger::log_info(char* s) {
-	file_ << "Info: " << s << std::endl;
+	std::cout << "Info: " << s << std::endl;
 }
 	
 void Logger::log_warning(std::string str) {
-	file_ << "Warning: " << str << std::endl;
+	std::cout << "Warning: " << str << std::endl;
 }
 
 void Logger::log_warning(char* s) {
-	file_ << "Warning: " << s << std::endl;
+	std::cout << "Warning: " << s << std::endl;
 }

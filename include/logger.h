@@ -1,11 +1,11 @@
 #include <string>
-#include <fstream>
+#include <iostream>
 #include "fixedstring.h"
 
 
 class Logger {
 public:
-	Logger(std::string filename);
+	Logger();
 	~Logger();
 	void log(std::string str);
 	void log(char* s);
@@ -15,7 +15,4 @@ public:
 	void log_info(char* s);
 	void log_warning(std::string str);
 	void log_warning(char* s);
-
-private:
-	std::ofstream file_;
 };
