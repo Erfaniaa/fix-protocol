@@ -32,7 +32,7 @@ void BoostClientConnection::send_message(FixedString message) {   // send a mess
 
 FixedString BoostClientConnection::receive_message() {
 	// receive a message from the socket connection
-	char buffer[1024];
+	char buffer[constants::MAX_MESSAGE_LENGTH + 1];
 	boost::system::error_code error;
 	std::size_t length = new_socket.read_some(boost::asio::buffer(buffer), error);
 	if (error == boost::asio::error::eof)
