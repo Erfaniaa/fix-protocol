@@ -8,6 +8,7 @@
 #include <iostream>
 #include <sstream>
 #include <boost/array.hpp>
+#include "../include/fixedvector.h"
 #include "../include/constants.h"
 
 class FixedString {
@@ -26,7 +27,7 @@ public:
 	void FixedString::operator=(const std::string& str);
 	bool operator==(const FixedString& other) const;
 	FixedString operator+(const FixedString& other);
-	std::vector<FixedString> FixedString::split(const char& delimiter);
+	FixedVector<FixedString> FixedString::split(const char& delimiter);
 	const char* c_str() const;
 	boost::array<char, constants::MAX_MESSAGE_LENGTH> to_boost_array() const;
 	std::ostream& operator<<(std::ostream& os);

@@ -133,8 +133,8 @@ FixedString FixedString::operator+(const FixedString& other) {
 	return new_fixed_string;
 }
 
-std::vector<FixedString> FixedString::split(const char& delimiter) {
-	std::vector<FixedString> result;
+FixedVector<FixedString> FixedString::split(const char& delimiter) {
+	FixedVector<FixedString> result;
 	FixedString current;
 
 	for (std::size_t i = 0; i < size_; ++i) {
