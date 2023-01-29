@@ -18,6 +18,10 @@ namespace constants {
 	// Field tags
 	const unsigned short SENDER_COMP_ID = 49;
 	const unsigned short TARGET_COMP_ID = 56;
+	const unsigned short SENDER_SUB_ID = 50;
+	const unsigned short SENDER_LOC_ID = 142;
+	const unsigned short TARGET_SUB_ID = 57;
+	const unsigned short TARGET_LOC_ID = 143;
 	const unsigned short MSG_TYPE = 35;
 	const unsigned short MSG_SEQ_NUM = 34;
 	const unsigned short SENDING_TIME = 52;
@@ -69,6 +73,10 @@ namespace constants {
 	// Sender and receiver
 	const FixedString SENDER_COMP_ID_VALUE = "1";
 	const FixedString TARGET_COMP_ID_VALUE = "2";
+	const FixedString SENDER_SUB_ID_VALUE = "11";
+	const FixedString TARGET_SUB_ID_VALUE = "22";
+	const FixedString SENDER_LOC_ID_VALUE = "111";
+	const FixedString TARGET_LOC_ID_VALUE = "222";
 
 	// Delimiter
 	const FixedString SOH = "\x01";
