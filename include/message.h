@@ -3,11 +3,12 @@
 #include "lookuptable.h"
 #include "field.h"
 
+
 class Message {
 public:
 	Message();
 	Message(FixedString str);
-	FixedString message_type() const;
+	Message& operator=(FixedString str);
 	void add_field(const Field &field);
 	void add_field(unsigned short tag, FixedString value);
 	FixedString serialize() const;
@@ -16,7 +17,6 @@ public:
 	FixedString get_checksum();
 
 private:
-	FixedString message_type_;
 	LookupTable fields_lookup_table_;
 	FixedVector<Field> fields_fixed_vector_;
 };

@@ -17,8 +17,21 @@ Message::Message(FixedString str) {
   	}
 }
 
-FixedString Message::message_type() const {
-	return message_type_;
+Message& Message::operator=(FixedString str) {
+	// Split string into tokens
+	FixedVector<FixedString> tokens;
+	std::istringstream iss(str.c_str());
+	for (std::string token; std::getline(iss, token, constants::SOH[0]); ) {
+		tokens.push_back(token);
+	}
+
+	// Parse fields from remaining tokens
+	for (int i = 0; i < tokens.size(); ++i) {
+		Field field(tokens[i]);
+		add_field(field);
+	}
+
+	return *this;  // Return reference to this object for chaining. 
 }
 
 void Message::add_field(const Field& field) {
