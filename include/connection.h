@@ -1,5 +1,5 @@
 #ifndef CONNECTION_H
-#define CONNECTION
+#define CONNECTION_H
 
 #include "fixedstring.h"
 
