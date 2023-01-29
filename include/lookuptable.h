@@ -2,7 +2,8 @@
 #define LOOKUP_TABLE_H
 
 #include <cstddef>
-#include "../include/constants.h"
+#include "constants.h"
+#include "fixedstring.h"
 
 
 class LookupTable {
@@ -15,9 +16,9 @@ public:
 	std::size_t size();
 
 private:
-	static constexpr std::size_t kMaxSize = constants::MAX_TAGS_COUNT;  
+	static constexpr std::size_t kMaxSize = constants::MAX_TAGS_COUNT;
 	std::size_t size_;  
-	FixedString values_[kMaxSize];
+	FixedString values_[constants::MAX_TAGS_COUNT];
 	FixedString default_value_ = "-1";
 };
 
