@@ -34,10 +34,15 @@ void Session::end() {
 
 void Session::receive_and_handle_message() {
 	Message msg = connection_->receive_message();
+	if (msg.serialize().size() == 0)
+		return;
 	Logger().log_info(const_cast<char*>("Message received"));
 	Logger().log_info(msg.serialize().c_str());
 	if (!logon_message_received_) {
 		handle_logon(msg);
+	}
+	if (msg.has_tag(constants::CHECKSUM)) {
+		handle_checksum(msg);
 	}
 }
 
@@ -56,9 +61,44 @@ void Session::handle_logon(Message& msg) {
 		Logger().log_error(const_cast<char*>("duplicated/unauthenticated/non-configured identity"));
 		end();
 	} else {
-		Logger().log_error(const_cast<char*>("invalid Logon message"));
+		Logger().log_error(const_cast<char*>("invalid Logon message (the first message must be Logon)"));
 		connection_->send_message(MessageFactory().create_logout()->serialize());
 		end();
+	}
+}
+
+void Session::handle_checksum(Message& msg) {
+	FixedString serialized_message = msg.serialize();
+	bool msg_ended_by_soh = (serialized_message[(int)serialized_message.size() - 1] == constants::SOH[0]);
+	if (!msg_ended_by_soh) {
+		Logger().log_warning(const_cast<char*>("Garbled message"));
+		return;
+	}
+	bool msg_has_checksum_tag = msg.has_tag(constants::CHECKSUM);
+	if (!msg_has_checksum_tag) {
+		Logger().log_warning(const_cast<char*>("Garbled message"));
+		return;
+	}
+	bool msg_checksum_value_has_length_3 = (msg.get_tag_value(constants::CHECKSUM).size() == 3);
+	if (!msg_checksum_value_has_length_3) {
+		Logger().log_warning(const_cast<char*>("Garbled message"));
+		return;
+	}
+	bool msg_ended_by_checksum_tag =
+		(serialized_message[(int)serialized_message.size() - 7] == '1') &&
+		(serialized_message[(int)serialized_message.size() - 6] == '0');
+	if (!msg_checksum_value_has_length_3) {
+		Logger().log_warning(const_cast<char*>("Garbled message"));
+		return;
+	}
+	bool msg_checksum_correct = (serialized_message.get_checksum() == msg.get_tag_value(constants::CHECKSUM));
+	if (!msg_checksum_correct) {
+		Logger().log_warning(const_cast<char*>("Garbled message"));
+		return;
+	}
+	else {
+		next_msg_seq_num_++;
+		//Accept message
 	}
 }
 

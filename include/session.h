@@ -18,6 +18,7 @@ public:
 	void start();
 	void end();
 	void handle_logon(Message& msg);
+	void handle_checksum(Message& msg);
 	void receive_and_handle_message();
 	bool is_session_running();
 private:
