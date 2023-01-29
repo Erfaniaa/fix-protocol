@@ -26,24 +26,23 @@ public:
 	char& operator[](std::size_t index);
 	const char& operator[](std::size_t index) const;
 	FixedString& operator=(const char* str);
+	FixedString& operator=(const FixedString& other);
+	FixedString& operator=(const unsigned short x);
 	void operator=(const std::string& str);
 	bool operator==(const FixedString& other) const;
 	bool operator==(const std::string& other) const;
-	FixedString operator+(const FixedString& other);
 	FixedVector<FixedString> split(const char& delimiter);
 	const char* c_str() const;
 	boost::array<char, constants::MAX_MESSAGE_LENGTH> to_boost_array() const;
 	int to_int() const;
-	std::ostream& operator<<(std::ostream& os);
-	std::istream& operator>>(std::istream& is);
 	void clear();
 	FixedString get_checksum();
+	FixedString& operator+=(const FixedString& other);
 
 private:
-	void new_data_if_null();
 	static constexpr std::size_t kMaxSize = constants::MAX_MESSAGE_LENGTH;
 	std::size_t size_;
-	char* data_ = NULL;
+	char data_[constants::MAX_MESSAGE_LENGTH + 1];
 };
 
 #endif

@@ -3,14 +3,9 @@
 
 FixedString::FixedString() : size_(0) {}
 
-FixedString::~FixedString() {
-	if (data_ != NULL)
-		delete data_;
-}
+FixedString::~FixedString() {}
 
 FixedString::FixedString(const std::string& str) {
-	new_data_if_null();
-
 	size_ = str.size();
 
 	if (size_ > kMaxSize) {
@@ -22,8 +17,6 @@ FixedString::FixedString(const std::string& str) {
 }
 
 FixedString::FixedString(const char* str) {
-	new_data_if_null();
-
 	size_ = 0;
 
 	while (str[size_] != '\0' && size_ < kMaxSize) {
@@ -35,8 +28,6 @@ FixedString::FixedString(const char* str) {
 }
 
 FixedString::FixedString(unsigned short x) {
-	new_data_if_null();
-
 	std::stringstream ss;
 	std::string str;
 	ss << x;
@@ -53,8 +44,6 @@ FixedString::FixedString(unsigned short x) {
 }
 
 void FixedString::push_back(const char& value) {
-	new_data_if_null();
-
 	if (size_ < kMaxSize) {
 		data_[size_++] = value;
 		data_[size_] = '\0';
@@ -81,8 +70,6 @@ const char& FixedString::operator[](std::size_t index) const {
 }
 
 FixedString& FixedString::operator=(const char* str) {
-	new_data_if_null();
-
 	size_ = 0;
 	std::size_t len = std::strlen(str);
 	for (std::size_t i = 0; i < len && i < kMaxSize; ++i) {
@@ -94,8 +81,6 @@ FixedString& FixedString::operator=(const char* str) {
 }
 
 void FixedString::operator=(const std::string& str) {
-	new_data_if_null();
-
 	if (str.size() > kMaxSize) {
 		Logger().log_error(const_cast<char*>("String exceeds maximum size of FixedString"));
 		throw std::length_error("String exceeds maximum size of FixedString");
@@ -128,23 +113,6 @@ bool FixedString::operator==(const std::string& other) const {
 		}
 	}
 	return true;
-}
-
-FixedString FixedString::operator+(const FixedString& other) {
-	FixedString new_fixed_string("");
-
-	new_fixed_string = *this;
-
-	if (size_ + other.size_ > kMaxSize) {
-		Logger().log_error(const_cast<char*>("FixedString length exceeded"));
-		throw std::length_error("FixedString length exceeded");
-	}
-
-	for (std::size_t i = 0; i < other.size_; ++i) {
-		new_fixed_string.push_back(other.data_[i]);
-	}
-
-	return new_fixed_string;
 }
 
 FixedVector<FixedString> FixedString::split(const char& delimiter) {
@@ -184,38 +152,66 @@ int FixedString::to_int() const {
 	return std::atoi(c_str());
 }
 
-std::ostream& FixedString::operator<<(std::ostream& os) {
-	os << c_str();
-	return os;
-}
-
-std::istream& FixedString::operator>>(std::istream& is) {
-	char buffer[kMaxSize + 1];
-	is >> buffer;
-	*this = buffer;
-	return is;
-}
-
 void FixedString::clear() {
 	size_ = 0;
 	data_[0] = '\0';
-}
-
-void FixedString::new_data_if_null() {
-	if (data_ == NULL) {
-		data_ = new char[kMaxSize + 1];
-		data_[0] = '\0';
-	}
 }
 
 FixedString FixedString::get_checksum() {
 	unsigned short sum = 0;
 	for (unsigned short i = 0; i < size(); i++)
 		sum = (sum + (unsigned short)data_[i]) % 256;
-	if (sum < 10)
-		return FixedString("00") + FixedString(sum);
-	else if (sum < 100)
-		return FixedString("0") + FixedString(sum);
+	if (sum < 10) {
+		FixedString result("00");
+		result += FixedString(sum);
+		return result;
+	}
+	else if (sum < 100) {
+		FixedString result("0");
+		result += FixedString(sum);
+		return result;
+	}
 	else
 		return FixedString(sum);
 }
+
+FixedString& FixedString::operator+=(const FixedString& other) {
+	if (size_ + other.size_ > kMaxSize) {
+		Logger().log_error(const_cast<char*>("FixedString length exceeded"));
+		throw std::length_error("FixedString length exceeded");
+	}
+
+	for (std::size_t i = 0; i < other.size_; ++i) {
+		push_back(other.data_[i]);
+	}
+
+	return *this;
+}
+
+
+FixedString& FixedString::operator=(const FixedString& other) {
+	size_ = other.size_;
+	std::copy(other.data_, other.data_ + size_, data_);
+	data_[size_] = '\0';
+
+	return *this;
+}
+
+FixedString& FixedString::operator=(const unsigned short x) {
+	std::stringstream ss;
+	std::string str;
+	ss << x;
+	ss >> str;
+
+	size_ = str.size();
+
+	if (size_ > kMaxSize) {
+		size_ = kMaxSize;
+	}
+
+	std::copy(str.begin(), str.begin() + size_, data_);
+	data_[size_] = '\0';  // Terminate the string with a null character. 
+
+    return *this;  // Return the modified FixedString object 
+} 
+
