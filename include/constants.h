@@ -80,6 +80,7 @@ namespace constants {
 	const unsigned short NEW_SEQ_NUM = 36;
 	const unsigned short GAP_FILL_FLAG = 123;
 	const unsigned short ORIG_CLORD_ID = 41;
+	const unsigned short CHECKSUM = 10;
 
 	// Sender and receiver
 	const std::string SENDER_COMP_ID_VALUE = "1";
