@@ -5,6 +5,8 @@
 #include <string>
 #include "fixedvector.h"
 #include "fixedstring.h"
+#include "logger.h"
+
 
 class Field {
 public:
