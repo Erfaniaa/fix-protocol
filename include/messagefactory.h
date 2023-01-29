@@ -1,3 +1,6 @@
+#ifndef MESSAGE_FACTORY_H
+#define MESSAGE_FACTORY_H
+
 #include "../include/constants.h"
 #include "../include/message.h"
 
@@ -18,3 +21,5 @@ public:
 	static Message* MessageFactory::create_order_cancel_request(unsigned short orig_clord_id, unsigned short order_id, unsigned short symbol, unsigned short side);
 	static Message* MessageFactory::create_order_cancel_reject(unsigned short ref_seq_num, FixedString clord_id, FixedString orig_clord_id, FixedString text);
 };
+
+#endif
