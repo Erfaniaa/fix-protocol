@@ -18,7 +18,10 @@ Session::Session(bool is_server, bool use_boost) {
 	}
 }
 
-Session::~Session() {}
+Session::~Session() {
+	if (connection_ != NULL)
+		delete connection_;
+}
 
 void Session::start() {
 	connection_->open_connection();
