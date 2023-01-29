@@ -44,7 +44,6 @@ namespace constants {
 	const unsigned short TEXT = 58;
 	const unsigned short EXEC_TRANS_TYPE = 20;
 	const unsigned short HANDL_INST = 21;
-	const unsigned short ORD_TYPE = 40;
 	const unsigned short TIME_IN_FORCE = 59;
 	const unsigned short ORDER_CAPACITY = 47;
 	const unsigned short ORDER_RESTATTRIBS = 376;
