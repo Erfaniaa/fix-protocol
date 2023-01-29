@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include "fixedstring.h"
+#include "constants.h"
 
 
 class Logger {
