@@ -10,6 +10,7 @@
 
 class Field {
 public:
+	Field();
 	Field(unsigned short tag, FixedString value);
 	Field(FixedString str);
 	unsigned short tag() const;

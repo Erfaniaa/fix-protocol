@@ -135,25 +135,25 @@ FixedString FixedString::operator+(const FixedString& other) {
 	return new_fixed_string;
 }
 
-FixedVector<FixedString> FixedString::split(const char& delimiter) {
-	FixedVector<FixedString> result;
-	FixedString current;
+// FixedVector<FixedString> FixedString::split(const char& delimiter) {
+// 	FixedVector<FixedString> result;
+// 	FixedString current;
 
-	for (std::size_t i = 0; i < size_; ++i) {
-		if (data_[i] == delimiter) {
-			result.push_back(current);
-			current = FixedString();
-		} else {
-			current.push_back(data_[i]);
-		}
-	}
+// 	for (std::size_t i = 0; i < size_; ++i) {
+// 		if (data_[i] == delimiter) {
+// 			result.push_back(current);
+// 			current = FixedString();
+// 		} else {
+// 			current.push_back(data_[i]);
+// 		}
+// 	}
 
-	if (current.size() > 0) {  // Add the last element if it exists 
-		result.push_back(current); 
-	}
+// 	if (current.size() > 0) {  // Add the last element if it exists 
+// 		result.push_back(current); 
+// 	}
 
-	return result;  // Return the vector of FixedStrings 
-}
+// 	return result;  // Return the vector of FixedStrings 
+// }
 
 const char* FixedString::c_str() const {
 	return data_;

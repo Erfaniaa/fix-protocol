@@ -1,6 +1,8 @@
 #include "../include/field.h"
 
 
+Field::Field() : tag_(0) {}
+
 Field::Field(unsigned short tag, FixedString value) : tag_(tag), value_(value) {}
 
 Field::Field(FixedString str) {
