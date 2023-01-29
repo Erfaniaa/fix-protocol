@@ -1,17 +1,16 @@
 #include "../include/session.h"
 
 
-Session::Session(bool is_server, bool use_boost) {
+Session::Session(bool is_server) {
 	is_server_ = is_server;
-	use_boost_ = use_boost;
-	if (use_boost) {
-		if (is_server)
+	if (use_boost_) {
+		if (is_server_)
 			connection_ = new BoostServerConnection();
 		else
 			connection_ = new BoostClientConnection();
 	}
 	else {
-		if (is_server)
+		if (is_server_)
 			connection_ = new ServerConnection();
 		else
 			connection_ = new ClientConnection();

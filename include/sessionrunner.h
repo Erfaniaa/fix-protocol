@@ -6,11 +6,11 @@
 
 class SessionRunner {
 public:
-	SessionRunner();
+	SessionRunner(bool is_server);
 	~SessionRunner();
 	void run();
 private:
-	Session session_;
+	Session *session_ = NULL;
 };
 
 #endif

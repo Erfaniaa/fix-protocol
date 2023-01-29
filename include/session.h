@@ -13,7 +13,7 @@
 
 class Session {
 public:
-	Session(bool is_server, bool use_boost);
+	Session(bool is_server);
 	~Session();
 	void start();
 	void end();
@@ -26,7 +26,7 @@ private:
 	unsigned int next_msg_seq_num_ = 0;
 	bool is_session_running_ = false;
 	bool logon_message_received_ = false;
-	bool is_server_, use_boost_;
+	bool is_server_, use_boost_ = constants::USE_BOOST;
 };
 
 #endif
