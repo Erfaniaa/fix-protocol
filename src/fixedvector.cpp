@@ -5,7 +5,7 @@ FixedVector<T>::FixedVector() : size_(0) {}
 
 template <typename T>
 void FixedVector<T>::push_back(const T& value) {
-	if (size_ < MaxSize) {
+	if (size_ < kMaxSize) {
 		data_[size_++] = value;
 	}
 }
@@ -34,12 +34,12 @@ const T& FixedVector<T>::operator[](std::size_t index) const {
 
 template <typename T>
 bool FixedVector<T>::operator==(const FixedVector<T>& other) const {
-	if (size() != rhs.size()) {
+	if (size() != other.size()) {
 		return false;
 	}
 
 	for (std::size_t i = 0; i < size(); ++i) {
-		if ((*this)[i] != rhs[i]) {
+		if ((*this)[i] != other[i]) {
 			return false;
 		}
 	}
@@ -49,10 +49,10 @@ bool FixedVector<T>::operator==(const FixedVector<T>& other) const {
 
 template <typename T> 
 FixedVector<T>& FixedVector<T>::operator=(const FixedVector<T>& other) const { 
-	size_ = rhs.size_; 
+	size_ = other.size_; 
 
 	for (std::size_t i = 0; i < size(); ++i) { 
-		data_[i] = rhs.data_[i]; 
+		data_[i] = other.data_[i]; 
 	} 
 
 	return this; 
