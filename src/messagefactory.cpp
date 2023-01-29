@@ -42,7 +42,7 @@ Message* MessageFactory::create_resend_request(unsigned short begin_seq_num, uns
 	return msg;
 }
 
-Message* MessageFactory::create_reject(unsigned short ref_seq_num, FixedString ref_tag_id, FixedString ref_msg_type) {
+Message* MessageFactory::create_reject(unsigned short ref_seq_num, const FixedString& ref_tag_id, const FixedString& ref_msg_type) {
 	Message* msg = new Message();
 	msg->add_field(constants::MSG_TYPE, constants::REJECT);
 	msg->add_field(constants::REF_SEQ_NUM, std::to_string(ref_seq_num));
@@ -51,20 +51,20 @@ Message* MessageFactory::create_reject(unsigned short ref_seq_num, FixedString r
 	return msg;
 }
 
-Message* MessageFactory::create_new_order_single(FixedString clordid, FixedString symbol, FixedString side, int orderQty, 
-												 FixedString ordType, double price, FixedString timeInForce, 
-										    	 FixedString orderCapacity, FixedString orderRestattribs) {
+Message* MessageFactory::create_new_order_single(const FixedString& clordid, const FixedString& symbol, const FixedString& side, int order_qty, 
+												 const FixedString& ord_type, double price, const FixedString& time_in_force, 
+										    	 const FixedString& order_capacity, const FixedString& order_restattribs) {
     Message* msg = new Message();
 	msg->add_field(constants::MSG_TYPE, constants::NEW_ORDER_SINGLE);
 	msg->add_field(constants::CLORDID, clordid);
 	msg->add_field(constants::SYMBOL, symbol);
 	msg->add_field(constants::SIDE, side);
-	msg->add_field(constants::ORDER_QTY, std::to_string(orderQty));
-	msg->add_field(constants::ORDER_TYPE, ordType);
+	msg->add_field(constants::ORDER_QTY, std::to_string(order_qty));
+	msg->add_field(constants::ORDER_TYPE, ord_type);
 	msg->add_field(constants::PRICE, std::to_string(price));
-	msg->add_field(constants::TIME_IN_FORCE, timeInForce);
-	msg->add_field(constants::ORDER_CAPACITY, orderCapacity);
-	msg->add_field(constants::ORDER_RESTATTRIBS, orderRestattribs);
+	msg->add_field(constants::TIME_IN_FORCE, time_in_force);
+	msg->add_field(constants::ORDER_CAPACITY, order_capacity);
+	msg->add_field(constants::ORDER_RESTATTRIBS, order_restattribs);
     return msg;
 }
 
@@ -88,12 +88,18 @@ Message* MessageFactory::create_order_cancel_request(unsigned short orig_clord_i
 	return msg;
 }
 
-Message* MessageFactory::create_order_cancel_reject(unsigned short ref_seq_num, FixedString clord_id, FixedString orig_clord_id, FixedString text) {
+Message* MessageFactory::create_order_cancel_reject(unsigned short ref_seq_num, const FixedString& clord_id, const FixedString& orig_clord_id, const FixedString& text) {
 	Message* msg = new Message();
 	msg->add_field(constants::MSG_TYPE, constants::ORDER_CANCEL_REJECT);
 	msg->add_field(constants::REF_SEQ_NUM, std::to_string(ref_seq_num));
 	msg->add_field(constants::CLORDID, clord_id);
 	msg->add_field(constants::ORIG_CLORD_ID, orig_clord_id);
 	msg->add_field(constants::TEXT, text);
+	return msg;
+}
+
+Message* MessageFactory::create_empty_checksum() {
+	Message* msg = new Message();
+	msg->add_field(constants::CHECKSUM, "000");
 	return msg;
 }
