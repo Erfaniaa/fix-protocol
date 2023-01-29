@@ -8,8 +8,10 @@
 #include <iostream>
 #include <sstream>
 #include <boost/array.hpp>
-#include "../include/fixedvector.h"
-#include "../include/constants.h"
+#include "fixedvector.h"
+#include "constants.h"
+#include "logger.h"
+
 
 class FixedString {
 public:
