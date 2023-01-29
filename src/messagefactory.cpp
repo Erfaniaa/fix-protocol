@@ -7,7 +7,7 @@ Message* MessageFactory::create_logon() {
 	Message* msg = new Message();
 	msg->add_field(constants::ENCRYPT_METHOD, "0");
 	msg->add_field(constants::HEART_BT_INT, "30");
-	msg->add_field(constants::RESET_SEQ_NUM_FLAG, "Y");
+	msg->add_field(constants::SEQUENCE_RESET, "Y");
 	msg->add_field(constants::SENDER_COMP_ID, constants::SENDER_COMP_ID_VALUE);
 	msg->add_field(constants::TARGET_COMP_ID, constants::TARGET_COMP_ID_VALUE);
 	return msg;
@@ -54,7 +54,7 @@ Message* MessageFactory::create_new_order_single(FixedString clordid, FixedStrin
 	msg->add_field(constants::SYMBOL, symbol);
 	msg->add_field(constants::SIDE, side);
 	msg->add_field(constants::ORDER_QTY, std::to_string(orderQty));
-	msg->add_field(constants::ORD_TYPE, ordType);
+	msg->add_field(constants::ORDER_TYPE, ordType);
 	msg->add_field(constants::PRICE, std::to_string(price));
 	msg->add_field(constants::TIME_IN_FORCE, timeInForce);
 	msg->add_field(constants::ORDER_CAPACITY, orderCapacity);
