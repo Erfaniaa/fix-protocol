@@ -36,7 +36,7 @@ Message& Message::operator=(FixedString str) {
 
 void Message::add_field(const Field& field) {
 	fields_fixed_vector_.push_back(field);
-	fields_lookup_table_[field.tag()] = field.value();
+	fields_lookup_table_.insert(field.tag(), field.value());
 }
 
 void Message::add_field(unsigned short tag, FixedString value) {
@@ -46,7 +46,10 @@ void Message::add_field(unsigned short tag, FixedString value) {
 FixedString Message::serialize() const {
 	FixedString serialized_message;
 	for (unsigned short i = 0; i < fields_fixed_vector_.size(); i++) {
-		serialized_message = serialized_message + FixedString(std::to_string(fields_fixed_vector_[i].tag())) + FixedString("=") + fields_fixed_vector_[i].value() + constants::SOH;
+		serialized_message += FixedString(fields_fixed_vector_[i].tag());
+		serialized_message.push_back('=');
+		serialized_message += fields_fixed_vector_[i].value();
+		serialized_message.push_back(constants::SOH[0]);
 	}
 	return serialized_message;
 }
@@ -67,10 +70,16 @@ FixedString Message::get_checksum() {
 		last_index -= 7;
 	for (unsigned short i = 0; i < last_index; i++)
 		sum = (sum + (unsigned short)serialized_message[i]) % 256;
-	if (sum < 10)
-		return FixedString("00") + FixedString(sum);
-	else if (sum < 100)
-		return FixedString("0") + FixedString(sum);
+	if (sum < 10) {
+		FixedString result("00");
+		result += FixedString(sum);
+		return result;
+	}
+	else if (sum < 100) {
+		FixedString result("0");
+		result += FixedString(sum);
+		return result;
+	}
 	else
 		return FixedString(sum);
 }
