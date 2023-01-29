@@ -18,7 +18,7 @@ Field::Field(FixedString str) {
 		value_ = tokens[1];
 	} else {
 		// Throw an exception if the string is not in the correct format
-		Logger().log_error("Invalid field format"); 
+		Logger().log_error(const_cast<char*>("Invalid field format"));
 		throw std::invalid_argument("Invalid field format"); 
 	} 
 }

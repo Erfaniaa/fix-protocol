@@ -97,7 +97,7 @@ void FixedString::operator=(const std::string& str) {
 	new_data_if_null();
 
 	if (str.size() > kMaxSize) {
-		Logger().log_error("String exceeds maximum size of FixedString");
+		Logger().log_error(const_cast<char*>("String exceeds maximum size of FixedString"));
 		throw std::length_error("String exceeds maximum size of FixedString");
 	}
 
@@ -124,7 +124,7 @@ FixedString FixedString::operator+(const FixedString& other) {
 	new_fixed_string = *this;
 
 	if (size_ + other.size_ > kMaxSize) {
-		Logger().log_error("FixedString length exceeded");
+		Logger().log_error(const_cast<char*>("FixedString length exceeded"));
 		throw std::length_error("FixedString length exceeded");
 	}
 

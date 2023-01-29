@@ -34,7 +34,7 @@ void Session::end() {
 
 void Session::receive_and_handle_message() {
 	Message msg = connection_->receive_message();
-	Logger().log_info("Message received");
+	Logger().log_info(const_cast<char*>("Message received"));
 	Logger().log_info(msg.serialize().c_str());
 	if (!logon_message_received_) {
 		handle_logon(msg);
@@ -53,10 +53,10 @@ void Session::handle_logon(Message& msg) {
 			connection_->send_message(MessageFactory().create_logon()->serialize());
 		}
 	} else if (is_server_ && is_user_duplicated_or_unauthenticated(msg)) {
-		Logger().log_error("duplicated/unauthenticated/non-configured identity");
+		Logger().log_error(const_cast<char*>("duplicated/unauthenticated/non-configured identity"));
 		end();
 	} else {
-		Logger().log_error("invalid Logon message");
+		Logger().log_error(const_cast<char*>("invalid Logon message"));
 		connection_->send_message(MessageFactory().create_logout()->serialize());
 		end();
 	}

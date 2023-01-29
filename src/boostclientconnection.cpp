@@ -23,7 +23,7 @@ void BoostClientConnection::open_connection() {
 		boost::asio::connect(*new_socket, endpoint_iterator);
 
 	} catch (std::exception& e) {
-		Logger().log_error("Connection failed error");
+		Logger().log_error(const_cast<char*>("Connection failed error"));
 	}
 	
 	client_fd = new_socket->native_handle();  // get the file descriptor for the socket 
@@ -45,7 +45,7 @@ FixedString BoostClientConnection::receive_message() {
 	if (error == boost::asio::error::eof)
 		return "";
 	else if (error) {
-		Logger().log_error("");
+		Logger().log_error(const_cast<char*>(""));
 		throw boost::system::system_error(error);
 	}
 	return buffer;
