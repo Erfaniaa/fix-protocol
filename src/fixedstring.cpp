@@ -165,6 +165,11 @@ boost::array<char, constants::MAX_MESSAGE_LENGTH> FixedString::to_boost_array() 
 	return arr;
 }
 
+int FixedString::to_int() const {
+	// TODO: handle errors if it is not an integer
+	return std::atoi(c_str());
+}
+
 std::ostream& FixedString::operator<<(std::ostream& os) {
 	os << c_str();
 	return os;

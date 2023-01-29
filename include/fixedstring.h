@@ -30,6 +30,7 @@ public:
 	FixedVector<FixedString> FixedString::split(const char& delimiter);
 	const char* c_str() const;
 	boost::array<char, constants::MAX_MESSAGE_LENGTH> to_boost_array() const;
+	int to_int() const;
 	std::ostream& operator<<(std::ostream& os);
 	std::istream& operator>>(std::istream& is);
 	void clear();
