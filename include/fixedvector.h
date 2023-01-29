@@ -2,7 +2,8 @@
 #define FIXED_VECTOR_H
 
 #include <cstddef>
-#include "../include/constants.h"
+#include "constants.h"
+
 
 template <typename T>
 class FixedVector {
@@ -20,7 +21,7 @@ public:
 private:
     static constexpr std::size_t kMaxSize = constants::MAX_MESSAGE_LENGTH;
     std::size_t size_;
-    T data_[kMaxSize];
+    T data_[constants::MAX_MESSAGE_LENGTH];
 };
 
 #endif

@@ -1,19 +1,20 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-#include "fixedstring.h"
+#include <string>
+
 
 namespace constants {
 	// FIX version
-	const FixedString VERSION = "4.4";
+	const std::string VERSION = "4.4";
 
 	// Message types
-	const FixedString NEW_ORDER_SINGLE = "D";
-	const FixedString EXECUTION_REPORT = "8";
-	const FixedString ORDER_CANCEL_REQUEST = "F";
-	const FixedString ORDER_CANCEL_REJECT = "9";
-	const FixedString LOGON = "A";
-	const FixedString LOGOUT = "5";
+	const std::string NEW_ORDER_SINGLE = "D";
+	const std::string EXECUTION_REPORT = "8";
+	const std::string ORDER_CANCEL_REQUEST = "F";
+	const std::string ORDER_CANCEL_REJECT = "9";
+	const std::string LOGON = "A";
+	const std::string LOGOUT = "5";
 
 	// Field tags
 	const unsigned short SENDER_COMP_ID = 49;
@@ -68,18 +69,18 @@ namespace constants {
 	const unsigned short ORIG_CLORD_ID = 41;
 
 	// Sender and receiver
-	const FixedString SENDER_COMP_ID_VALUE = "1";
-	const FixedString TARGET_COMP_ID_VALUE = "2";
-	const FixedString SENDER_SUB_ID_VALUE = "11";
-	const FixedString TARGET_SUB_ID_VALUE = "22";
-	const FixedString SENDER_LOC_ID_VALUE = "111";
-	const FixedString TARGET_LOC_ID_VALUE = "222";
+	const std::string SENDER_COMP_ID_VALUE = "1";
+	const std::string TARGET_COMP_ID_VALUE = "2";
+	const std::string SENDER_SUB_ID_VALUE = "11";
+	const std::string TARGET_SUB_ID_VALUE = "22";
+	const std::string SENDER_LOC_ID_VALUE = "111";
+	const std::string TARGET_LOC_ID_VALUE = "222";
 
 	// Delimiter
-	const FixedString SOH = "\x01";
+	const std::string SOH = "\x01";
 
 	// Socket
-	const FixedString HOST = "127.0.0.1";
+	const std::string HOST = "127.0.0.1";
 	const unsigned short PORT = 5555;
 
 	// Messages length

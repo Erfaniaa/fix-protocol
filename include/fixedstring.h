@@ -9,7 +9,7 @@
 #include <sstream>
 #include <boost/array.hpp>
 #include "fixedvector.h"
-// #include "constants.h"
+#include "constants.h"
 #include "logger.h"
 
 
