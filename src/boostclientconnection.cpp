@@ -37,7 +37,9 @@ FixedString BoostClientConnection::receive_message() {
 	std::size_t length = new_socket.read_some(boost::asio::buffer(buffer), error);
 	if (error == boost::asio::error::eof)
 		return "";
-	else if (error)
+	else if (error) {
+		Logger().log_error("");
 		throw boost::system::system_error(error);
+	}
 	return buffer;
 }
