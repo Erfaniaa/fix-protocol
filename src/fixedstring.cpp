@@ -118,6 +118,18 @@ bool FixedString::operator==(const FixedString& other) const {
 	return true;
 }
 
+bool FixedString::operator==(const std::string& other) const {
+	if (size_ != other.size()) {
+		return false;
+	}
+	for (std::size_t i = 0; i < size_; ++i) {
+		if (data_[i] != other[i]) {
+			return false;
+		}
+	}
+	return true;
+}
+
 FixedString FixedString::operator+(const FixedString& other) {
 	FixedString new_fixed_string("");
 

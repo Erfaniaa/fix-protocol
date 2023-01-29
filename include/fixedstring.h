@@ -28,6 +28,7 @@ public:
 	FixedString& operator=(const char* str);
 	void operator=(const std::string& str);
 	bool operator==(const FixedString& other) const;
+	bool operator==(const std::string& other) const;
 	FixedString operator+(const FixedString& other);
 	FixedVector<FixedString> split(const char& delimiter);
 	const char* c_str() const;
