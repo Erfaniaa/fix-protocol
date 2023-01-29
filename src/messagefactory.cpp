@@ -5,6 +5,7 @@ MessageFactory::MessageFactory() {}
 
 Message* MessageFactory::create_logon() {
 	Message* msg = new Message();
+	msg->add_field(constants::MSG_TYPE, constants::LOGON);
 	msg->add_field(constants::ENCRYPT_METHOD, "0");
 	msg->add_field(constants::HEART_BT_INT, "30");
 	msg->add_field(constants::SEQUENCE_RESET, "Y");
@@ -15,23 +16,27 @@ Message* MessageFactory::create_logon() {
 
 Message* MessageFactory::create_logout() {
 	Message* msg = new Message();
+	msg->add_field(constants::MSG_TYPE, constants::LOGOUT);
 	msg->add_field(constants::TEXT, "Closing connection");
 	return msg;
 }
 
 Message* MessageFactory::create_heartbeat() {
 	Message* msg = new Message();
+	msg->add_field(constants::MSG_TYPE, constants::HEART_BEAT);
 	return msg;
 }
 
 Message* MessageFactory::create_test_request() {
 	Message* msg = new Message();
+	msg->add_field(constants::MSG_TYPE, constants::TEST_REQUEST);
 	msg->add_field(constants::TEST_REQ_ID, "Test Request ID");
 	return msg;
 }
 
 Message* MessageFactory::create_resend_request(unsigned short begin_seq_num, unsigned short end_seq_num) {
 	Message* msg = new Message();
+	msg->add_field(constants::MSG_TYPE, constants::RESEND_REQUEST);
 	msg->add_field(constants::BEGIN_SEQ_NUM, std::to_string(begin_seq_num));
 	msg->add_field(constants::END_SEQ_NUM, std::to_string(end_seq_num));
 	return msg;
@@ -39,6 +44,7 @@ Message* MessageFactory::create_resend_request(unsigned short begin_seq_num, uns
 
 Message* MessageFactory::create_reject(unsigned short ref_seq_num, FixedString ref_tag_id, FixedString ref_msg_type) {
 	Message* msg = new Message();
+	msg->add_field(constants::MSG_TYPE, constants::REJECT);
 	msg->add_field(constants::REF_SEQ_NUM, std::to_string(ref_seq_num));
 	msg->add_field(constants::REF_TAG_ID, ref_tag_id);
 	msg->add_field(constants::REF_MSG_TYPE, ref_msg_type);
@@ -84,6 +90,7 @@ Message* MessageFactory::create_order_cancel_request(unsigned short orig_clord_i
 
 Message* MessageFactory::create_order_cancel_reject(unsigned short ref_seq_num, FixedString clord_id, FixedString orig_clord_id, FixedString text) {
 	Message* msg = new Message();
+	msg->add_field(constants::MSG_TYPE, constants::ORDER_CANCEL_REJECT);
 	msg->add_field(constants::REF_SEQ_NUM, std::to_string(ref_seq_num));
 	msg->add_field(constants::CLORDID, clord_id);
 	msg->add_field(constants::ORIG_CLORD_ID, orig_clord_id);
