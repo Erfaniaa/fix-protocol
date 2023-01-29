@@ -9,6 +9,10 @@
 #include "../include/clientconnection.h"
 
 
+ClientConnection::ClientConnection() {}
+
+ClientConnection::~ClientConnection() {}
+
 void ClientConnection::open_connection() {
 	struct sockaddr_in server_address;
 

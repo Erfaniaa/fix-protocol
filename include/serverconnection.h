@@ -9,11 +9,12 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <string>
-#include "../include/fixedstring.h"
-#include "../include/logger.h"
+#include "connection.h"
+#include "fixedstring.h"
+#include "logger.h"
 
 
-class ServerConnection {
+class ServerConnection: public Connection {
 public:
 	void open_connection();
 	void close_connection();
