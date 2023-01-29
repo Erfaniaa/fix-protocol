@@ -15,6 +15,19 @@ namespace constants {
 	const std::string ORDER_CANCEL_REJECT = "9";
 	const std::string LOGON = "A";
 	const std::string LOGOUT = "5";
+	const std::string ORDER_STATUS_REQUEST = "H";
+	const std::string MARKET_DATA_REQUEST = "V";
+	const std::string MARKET_DATA_SNAPSHOT = "W";
+	const std::string NEW_ORDER_ABANDONED = "AO";
+	const std::string QUOTE = "S";
+	const std::string QUOTE_CANCEL = "Z";
+	const std::string MASS_QUOTE = "i";
+	const std::string QUOTE_STATUS_REQUEST = "a";
+	const std::string HEART_BEAT = "0";
+	const std::string TEST_REQUEST = "1";
+	const std::string RESEND_REQUEST = "2";
+	const std::string REJECT = "3";
+	const std::string SEQUENCE_RESET_MSG_TYPE = "4";
 
 	// Field tags
 	const unsigned short SENDER_COMP_ID = 49;
@@ -78,6 +91,7 @@ namespace constants {
 
 	// Delimiter
 	const std::string SOH = "\x01";
+	// const std::string SOH = "|";
 
 	// Socket
 	const std::string HOST = "127.0.0.1";
