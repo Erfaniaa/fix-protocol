@@ -2,7 +2,7 @@
 
 Message::Message() {}
 
-Message::Message(FixedString str) {
+Message::Message(const FixedString& str) {
 	// Split string into tokens
 	FixedVector<FixedString> tokens;
 	std::istringstream iss(str.c_str());
@@ -17,7 +17,7 @@ Message::Message(FixedString str) {
   	}
 }
 
-Message& Message::operator=(FixedString str) {
+Message& Message::operator=(const FixedString& str) {
 	// Split string into tokens
 	FixedVector<FixedString> tokens;
 	std::istringstream iss(str.c_str());
@@ -39,7 +39,7 @@ void Message::add_field(const Field& field) {
 	fields_lookup_table_.insert(field.tag(), field.value());
 }
 
-void Message::add_field(unsigned short tag, FixedString value) {
+void Message::add_field(unsigned short tag, const FixedString& value) {
 	add_field(Field(tag, value));
 }
 

@@ -10,10 +10,10 @@
 class Message {
 public:
 	Message();
-	Message(FixedString str);
-	Message& operator=(FixedString str);
+	Message(const FixedString& str);
+	Message& operator=(const FixedString& str);
 	void add_field(const Field &field);
-	void add_field(unsigned short tag, FixedString value);
+	void add_field(unsigned short tag, const FixedString& value);
 	FixedString serialize() const;
 	bool has_tag(unsigned short tag);
 	FixedString get_tag_value(unsigned short tag);
