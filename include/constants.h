@@ -93,6 +93,9 @@ namespace constants {
 	bool LOG_INFO = true;
 	bool LOG_WARNINGS = true;
 	bool LOG_ERRORS = true;
+
+	// Use Boost socket library
+	bool USE_BOOST = false;
 }
 
 #endif
