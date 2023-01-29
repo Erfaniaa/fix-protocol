@@ -1,3 +1,6 @@
+#ifndef MESSAGE_H
+#define MESSAGE_H
+
 #include "constants.h"
 #include "fixedstring.h"
 #include "lookuptable.h"
@@ -20,3 +23,5 @@ private:
 	LookupTable fields_lookup_table_;
 	FixedVector<Field> fields_fixed_vector_;
 };
+
+#endif
