@@ -87,6 +87,12 @@ namespace constants {
 
 	// Tags count
 	const unsigned short MAX_TAGS_COUNT = 1024;
+
+	// Logger config
+	bool LOG_GENERAL_MESSAGES = true;
+	bool LOG_INFO = true;
+	bool LOG_WARNINGS = true;
+	bool LOG_ERRORS = true;
 }
 
 #endif
