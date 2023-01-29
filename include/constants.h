@@ -57,7 +57,6 @@ namespace constants {
 	const unsigned short ORDER_QTY_TYPE_CANCELLED = 859;
 	const unsigned short ENCRYPT_METHOD = 98;
 	const unsigned short HEART_BT_INT = 108;
-	const unsigned short RESET_SEQ_NUM_FLAG = 141;
 	const unsigned short TEST_REQ_ID = 112;
 	const unsigned short BEGIN_SEQ_NUM = 7;
 	const unsigned short END_SEQ_NUM = 16;
