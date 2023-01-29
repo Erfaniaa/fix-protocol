@@ -3,9 +3,9 @@
 
 Field::Field() : tag_(0) {}
 
-Field::Field(unsigned short tag, FixedString value) : tag_(tag), value_(value) {}
+Field::Field(unsigned short tag, const FixedString& value) : tag_(tag), value_(value) {}
 
-Field::Field(FixedString str) {
+Field::Field(const FixedString& str) {
 	// Parse the string to set tag and value
 	std::stringstream ss(str.c_str());
 	std::string item;

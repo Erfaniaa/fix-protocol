@@ -11,8 +11,8 @@
 class Field {
 public:
 	Field();
-	Field(unsigned short tag, FixedString value);
-	Field(FixedString str);
+	Field(unsigned short tag, const FixedString& value);
+	Field(const FixedString& str);
 	unsigned short tag() const;
 	FixedString value() const;
 
