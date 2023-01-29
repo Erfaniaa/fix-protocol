@@ -48,7 +48,6 @@ namespace constants {
 	const unsigned short ORDER_CAPACITY = 47;
 	const unsigned short ORDER_RESTATTRIBS = 376;
 	const unsigned short ORDER_ID = 37;
-	const unsigned short ORDER_QTY_TYPE = 854;
 	const unsigned short ORDER_QTY_TYPE_QTY = 854;
 	const unsigned short ORDER_QTY_TYPE_UNITS = 855;
 	const unsigned short ORDER_QTY_TYPE_CONTRACTS = 856;
