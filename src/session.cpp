@@ -39,17 +39,18 @@ void Session::receive_and_handle_message() {
 	Logger().log_info(const_cast<char*>("Message received"));
 	Logger().log_info(msg.serialize().c_str());
 	if (!logon_message_received_) {
-		handle_logon(msg);
+		handle_logon(msg); //Scenario 1B, 1S and 2S
 		return;
 	}
 	if (msg.has_tag(constants::CHECKSUM)) {
-		handle_checksum(msg);
+		handle_checksum(msg); //Scenario 3
 		return;
 	}
 	if (msg.get_tag_value(constants::MSG_TYPE) == constants::HEART_BEAT) {
-		handle_heart_beat(msg);
+		handle_heart_beat(msg); //Scenario 5
 		return;
 	}
+	Logger().log_warning(const_cast<char *>("Ingoring message because it is invalid or garbled"));
 }
 
 void Session::handle_logon(Message& msg) {
