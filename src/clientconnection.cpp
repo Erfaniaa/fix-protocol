@@ -48,3 +48,21 @@ FixedString ClientConnection::receive_message() {
 	read(new_socket, buffer, constants::MAX_MESSAGE_LENGTH);
 	return buffer;
 }
+
+bool ClientConnection::is_connected() {
+	int error = 0;
+	socklen_t len = sizeof(error);
+	int retval = getsockopt(client_fd, SOL_SOCKET, SO_ERROR, &error, &len);
+
+	if (retval != 0) {
+		/* there was a problem getting the error code */
+		return false;
+	}
+
+	if (error != 0) {
+		/* socket has a non zero error status */
+		return false;
+	}
+
+	return true;  // No error. Connection is established. 
+}

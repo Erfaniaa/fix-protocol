@@ -17,6 +17,7 @@ public:
 	void close_connection();
 	void send_message(FixedString message);
 	FixedString receive_message();
+	bool is_connected();
 
 private:
 	const FixedString host = constants::HOST;

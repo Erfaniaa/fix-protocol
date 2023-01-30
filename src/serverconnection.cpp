@@ -49,3 +49,21 @@ FixedString ServerConnection::receive_message() {
 	read(new_socket, buffer, constants::MAX_MESSAGE_LENGTH + 1);
 	return buffer;
 }
+
+bool ServerConnection::is_connected() {
+	int error = 0;
+	socklen_t len = sizeof(error);
+	int retval = getsockopt(server_fd, SOL_SOCKET, SO_ERROR, &error, &len);
+
+	if (retval != 0) {
+		/* there was a problem getting the error code */
+		return false;
+	}
+
+	if (error != 0) {
+		/* socket has a non zero error status */
+		return false;
+    }
+
+    return true;
+}

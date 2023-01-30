@@ -30,3 +30,7 @@ FixedString BoostServerConnection::receive_message() {
     boost::asio::read(*new_socket, boost::asio::buffer(data)); // read data from the socket connection    
     return data; // return the data received from the client
 }
+
+bool BoostServerConnection::is_connected() {
+	return new_socket->is_open();
+}

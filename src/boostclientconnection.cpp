@@ -50,3 +50,7 @@ FixedString BoostClientConnection::receive_message() {
 	}
 	return buffer;
 }
+
+bool BoostClientConnection::is_connected() {
+	return new_socket->is_open();
+}
