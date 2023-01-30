@@ -40,9 +40,15 @@ void Session::receive_and_handle_message() {
 	Logger().log_info(msg.serialize().c_str());
 	if (!logon_message_received_) {
 		handle_logon(msg);
+		return;
 	}
 	if (msg.has_tag(constants::CHECKSUM)) {
 		handle_checksum(msg);
+		return;
+	}
+	if (msg.get_tag_value(constants::MSG_TYPE) == constants::HEART_BEAT) {
+		handle_heart_beat(msg);
+		return;
 	}
 }
 
@@ -100,6 +106,11 @@ void Session::handle_checksum(Message& msg) {
 		next_msg_seq_num_++;
 		//Accept message
 	}
+}
+
+void Session::handle_heart_beat(Message& msg) {
+	next_msg_seq_num_++;
+	//Accept message
 }
 
 bool Session::is_session_running() {

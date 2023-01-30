@@ -1,12 +1,32 @@
+#include <thread>
 #include "../include/fixedstring.h"
 #include "../include/messagefactory.h"
 #include "../include/clientconnection.h"
+#include "../include/logger.h"
 
+
+// void receive_and_log_message() {
+// 	while (client_connection.is_connected()) {
+// 		FixedString received_fixed_string = client_connection.receive_message();
+// 		if (received_fixed_string.size() == 0)
+// 			continue;
+// 		Logger().log_info(const_cast<char*>("Message received"));
+// 		Logger().log_info(received_fixed_string.c_str());
+// 	}
+// }
 
 int main() {
 	ClientConnection client_connection;
 	client_connection.open_connection();
-	for (int i = 1; i <= 10; i++) {
+
+	std::cout << 1 << std::endl;
+	// std::thread t(receive_and_log_message);
+	// t.join();
+	std::cout << 2 << std::endl;
+
+	for (int i = 1; i <= 1; i++) {
+		Logger().log_info(const_cast<char*>("Message sent"));
+		Logger().log_info(MessageFactory().create_logon()->serialize().c_str());
 		client_connection.send_message(MessageFactory().create_logon()->serialize());
 	}
 	return 0;
