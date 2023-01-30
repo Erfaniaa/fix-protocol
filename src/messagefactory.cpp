@@ -103,3 +103,10 @@ Message* MessageFactory::create_empty_checksum() {
 	msg->add_field(constants::CHECKSUM, "000");
 	return msg;
 }
+
+Message* MessageFactory::create_heartbeat_with_test_req_id(const FixedString& test_req_id_value) {
+	Message* msg = new Message();
+	msg->add_field(constants::MSG_TYPE, constants::HEART_BEAT);
+	msg->add_field(constants::TEST_REQ_ID, test_req_id_value);
+	return msg;
+}

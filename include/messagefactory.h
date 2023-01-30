@@ -21,6 +21,7 @@ public:
 	static Message* create_order_cancel_request(unsigned short orig_clord_id, unsigned short order_id, unsigned short symbol, unsigned short side);
 	static Message* create_order_cancel_reject(unsigned short ref_seq_num, const FixedString& clord_id, const FixedString& orig_clord_id, const FixedString& text);
 	static Message* create_empty_checksum();
+	static Message* create_heartbeat_with_test_req_id(const FixedString& test_req_id_value);
 };
 
 #endif
