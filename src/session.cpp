@@ -34,8 +34,19 @@ void Session::end() {
 
 void Session::receive_and_handle_message() {
 	Message msg = connection_->receive_message();
-	if (msg.serialize().size() == 0)
+	if (msg.serialize().size() == 0) {
+		std::chrono::duration<double> elapsed_seconds = std::chrono::system_clock::now() - last_received_message_time;
+		if (elapsed_seconds > (std::chrono::duration<double>)(heartbeat_interval * 1.2)) {
+			Logger().log_info(const_cast<char*>("No messages received for a while"));
+			handle_send_test_request(); //Scenario 6
+		}
+		else if (elapsed_seconds > (std::chrono::duration<double>)heartbeat_interval) {
+			Logger().log_info(const_cast<char*>("No messages received for a while"));
+			handle_send_heart_beat_a(msg); //Scenario 4_a
+		}
 		return;
+	}
+	last_received_message_time = std::chrono::system_clock::now();
 	Logger().log_info(const_cast<char*>("Message received"));
 	Logger().log_info(msg.serialize().c_str());
 	if (!logon_message_received_) {
@@ -46,8 +57,16 @@ void Session::receive_and_handle_message() {
 		handle_checksum(msg); //Scenario 3
 		return;
 	}
+	if (msg.get_tag_value(constants::MSG_TYPE) == constants::TEST_REQUEST) {
+		handle_send_heart_beat_b(msg); //Scenario 4_b
+		return;
+	}
 	if (msg.get_tag_value(constants::MSG_TYPE) == constants::HEART_BEAT) {
 		handle_heart_beat(msg); //Scenario 5
+		return;
+	}
+	if (msg.get_tag_value(constants::MSG_TYPE) == constants::REJECT) {
+		handle_reject(); //Scenario 7
 		return;
 	}
 	Logger().log_warning(const_cast<char *>("Ingoring message because it is invalid or garbled"));
@@ -110,6 +129,33 @@ void Session::handle_checksum(Message& msg) {
 }
 
 void Session::handle_heart_beat(Message& msg) {
+	if (msg.has_tag(constants::HEART_BT_INT)) {
+		heartbeat_interval = std::stod(msg.get_tag_value(constants::HEART_BT_INT).c_str());
+	}
+	next_msg_seq_num_++;
+	//Accept message
+}
+
+void Session::handle_send_heart_beat_a(Message& msg) {
+	connection_->send_message(MessageFactory().create_heartbeat().serialize());
+	next_msg_seq_num_++;
+	//Accept message
+}
+
+void Session::handle_send_heart_beat_b(Message& msg) {
+	FixedString test_req_id = msg.get_tag_value(constants::TEST_REQ_ID);
+	connection_->send_message(MessageFactory().create_heartbeat_with_test_req_id(test_req_id).serialize());
+	next_msg_seq_num_++;
+	//Accept message
+}
+
+void Session::handle_send_test_request() {
+	connection_->send_message(MessageFactory().create_heartbeat_with_test_req_id(constants::TEST_REQ_ID_VALUE).serialize());
+	next_msg_seq_num_++;
+	//Accept message
+}
+
+void Session::handle_reject() {
 	next_msg_seq_num_++;
 	//Accept message
 }
