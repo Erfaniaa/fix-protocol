@@ -26,6 +26,7 @@ public:
 	void handle_send_heart_beat_b(Message& msg);
 	void handle_send_test_request();
 	void handle_reject();
+	void handle_resend_request();
 	void receive_and_handle_message();
 	bool is_session_running();
 

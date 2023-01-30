@@ -69,6 +69,10 @@ void Session::receive_and_handle_message() {
 		handle_reject(); //Scenario 7
 		return;
 	}
+	if (msg.get_tag_value(constants::MSG_TYPE) == constants::RESEND_REQUEST) {
+		handle_resend_request(); //Scenario 8
+		return;
+	}
 	Logger().log_warning(const_cast<char *>("Ingoring message because it is invalid or garbled"));
 }
 
@@ -156,6 +160,14 @@ void Session::handle_send_test_request() {
 }
 
 void Session::handle_reject() {
+	next_msg_seq_num_++;
+	//Accept message
+}
+
+void Session::handle_resend_request() {
+	Message response = MessageFactory().create_resend_request(next_msg_seq_num_, next_msg_seq_num_);
+	response.add_field(constants::GAP_FILL_FLAG, "Y");
+	connection_->send_message(response.serialize());
 	next_msg_seq_num_++;
 	//Accept message
 }
