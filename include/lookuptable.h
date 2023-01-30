@@ -19,7 +19,7 @@ private:
 	static constexpr std::size_t kMaxSize = constants::MAX_TAGS_COUNT;
 	std::size_t size_;  
 	FixedString values_[constants::MAX_TAGS_COUNT];
-	FixedString default_value_ = "-1";
+	FixedString default_value_ = "";
 };
 
 #endif
