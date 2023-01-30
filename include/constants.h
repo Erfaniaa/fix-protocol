@@ -82,7 +82,10 @@ namespace constants {
 	const unsigned short ORIG_CLORD_ID = 41;
 	const unsigned short CHECKSUM = 10;
 
-	// Sender and receiver
+	// Values for tags
+	const std::string TEST_REQ_ID_VALUE = "123";
+
+	// Sender and receiver tag values
 	const std::string SENDER_COMP_ID_VALUE = "1";
 	const std::string TARGET_COMP_ID_VALUE = "2";
 	const std::string SENDER_SUB_ID_VALUE = "11";
