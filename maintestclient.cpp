@@ -24,8 +24,8 @@ int main() {
 
 	for (int i = 1; i <= 1; i++) {
 		Logger().log_info(const_cast<char*>("Message sent"));
-		Logger().log_info(MessageFactory().create_logon()->serialize().c_str());
-		client_connection.send_message(MessageFactory().create_logon()->serialize());
+		Logger().log_info(MessageFactory().create_logon().serialize().c_str());
+		client_connection.send_message(MessageFactory().create_logon().serialize());
 	}
 	return 0;
 }

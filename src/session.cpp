@@ -56,20 +56,20 @@ void Session::receive_and_handle_message() {
 void Session::handle_logon(Message& msg) {
 	if (msg.get_tag_value(constants::MSG_TYPE) == constants::LOGON) {
 		if (msg.get_tag_value(constants::MSG_SEQ_NUM).to_int() > next_msg_seq_num_) {
-			FixedString fixed_string = MessageFactory().create_resend_request(next_msg_seq_num_, next_msg_seq_num_)->serialize();
+			FixedString fixed_string = MessageFactory().create_resend_request(next_msg_seq_num_, next_msg_seq_num_).serialize();
 			connection_->send_message(fixed_string);
 		}
 		else {
 			logon_message_received_ = true;
 			next_msg_seq_num_ = msg.get_tag_value(constants::MSG_SEQ_NUM).to_int() + 1;
-			connection_->send_message(MessageFactory().create_logon()->serialize());
+			connection_->send_message(MessageFactory().create_logon().serialize());
 		}
 	} else if (is_server_ && is_user_duplicated_or_unauthenticated(msg)) {
 		Logger().log_error(const_cast<char*>("duplicated/unauthenticated/non-configured identity"));
 		end();
 	} else {
 		Logger().log_error(const_cast<char*>("invalid Logon message (the first message must be Logon)"));
-		connection_->send_message(MessageFactory().create_logout()->serialize());
+		connection_->send_message(MessageFactory().create_logout().serialize());
 		end();
 	}
 }
