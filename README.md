@@ -54,3 +54,9 @@ Source: [English Wikipedia](https://en.wikipedia.org/wiki/Financial_Information_
    This will send 5000 messages to the server (session acceptor), and receives some messages. It waits for 50 milliseconds before sending each message. In this case, we added 50 * 5000 milliseconds (250 seconds) to the run-time.
 
    I tested this on a Lenovo Thinkpad P14s Gen 3 laptop, and it took 253.35 seconds. I had added 250 seconds manually, therefore our algorithm took 3.35 seconds to run (for sending 5000 messages and receiving their responses).
+
+## To-do
+
+- Handle the 14th scenario of [FIX Protocol 4.4 testcases](https://www.fixtrading.org/standards/fix-session-testcases-online/).
+- Separate configuration constants from FIX protocol constants. Don't store everything in a single `include/constants.h` file.
+- Use smart_ptr and move semantics to improve efficiency.
