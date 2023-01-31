@@ -57,7 +57,8 @@ void Session::receive_and_handle_message() {
 	if (msg.has_tag(constants::CHECKSUM)) {
 		handle_checksum(msg); //Scenario 3
 	}
-	handle_message_standard_header(msg); //Scenario 2_a, 2_b, and 2_c
+	if (received_valid_message_)
+		handle_message_standard_header(msg); //Scenario 2_a, 2_b, and 2_c
 	if (received_valid_message_) {
 		if (msg.get_tag_value(constants::MSG_TYPE) == constants::TEST_REQUEST) {
 			handle_send_heart_beat_b(msg); //Scenario 4_b
@@ -129,12 +130,6 @@ void Session::handle_checksum(Message& msg) {
 		received_valid_message_ = false;
 		return;
 	}
-	bool msg_has_checksum_tag = msg.has_tag(constants::CHECKSUM);
-	if (!msg_has_checksum_tag) {
-		Logger().log_warning(const_cast<char*>("Garbled message"));
-		received_valid_message_ = false;
-		return;
-	}
 	bool msg_checksum_value_has_length_3 = (msg.get_tag_value(constants::CHECKSUM).size() == 3);
 	if (!msg_checksum_value_has_length_3) {
 		Logger().log_warning(const_cast<char*>("Garbled message"));
@@ -149,7 +144,7 @@ void Session::handle_checksum(Message& msg) {
 		received_valid_message_ = false;
 		return;
 	}
-	bool msg_checksum_correct = (serialized_message.get_checksum() == msg.get_tag_value(constants::CHECKSUM));
+	bool msg_checksum_correct = (msg.get_checksum() == msg.get_tag_value(constants::CHECKSUM));
 	if (!msg_checksum_correct) {
 		Logger().log_warning(const_cast<char*>("Garbled message"));
 		received_valid_message_ = false;
