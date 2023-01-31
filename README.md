@@ -36,7 +36,7 @@ Source: [English Wikipedia](https://en.wikipedia.org/wiki/Financial_Information_
 
 - Instead of using STL vector, I implemented `FixedVector` class. It uses C++ classic arrays to handle operations exactly in O(1) (while STL vector handles them in *amortized* O(1)). Also it prevents large amount of memory fragmentations. It is useful when we know that our messages' size is limited.
 - Instead of using STL string, I implemented `FixedString` class. It uses C++ classic character arrays to handle operations exactly in O(1) (while STL string handles them in *amortized* O(1)). Also it prevents large amount of memory fragmentations. It is useful when we know that our messages' size is limited.
-- Instead of using STL unordered_map, I implemented `LookupTable` class. It uses C++ classic character arrays to handle operations exactly in O(1) (while STL unordered_map handles them in *amortized* O(1)). It doesn't need hashing algorithms and it's faster. It is useful when we know that our messages' size is limited.
+- Instead of using STL unordered_map, I implemented `LookupTable` class. It uses C++ classic character arrays to handle operations exactly in O(1). It doesn't need hashing algorithms and linked-lists, so it's faster.
 - According to my research the median/average size of FIX protocol message's length is not greater than 200. So I set `MAX_MESSAGE_LENGTH` constant to 256.
 - Both classic sockets and Boost Asio sockets have been implemented in this project. You can switch between them easily.
 - I used `-O2` flag for optimization.
