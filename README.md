@@ -8,6 +8,12 @@ The **Financial Information eXchange** (**FIX**) protocol is an electronic commu
 
 Source: [English Wikipedia](https://en.wikipedia.org/wiki/Financial_Information_eXchange)
 
+## Basic FIX Timeline
+
+<img src="https://aquaq.co.uk/wp-content/uploads/2016/03/FIX-message-timeline1.png">
+
+Source: [AQUAQ Analytics](https://aquaq.co.uk/kdb-fix-adapter/)
+
 ## Run
 
 1. Clone this repository.
