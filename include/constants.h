@@ -81,6 +81,9 @@ namespace constants {
 	const unsigned short GAP_FILL_FLAG = 123;
 	const unsigned short ORIG_CLORD_ID = 41;
 	const unsigned short CHECKSUM = 10;
+	const unsigned short POSS_DUP_FLAG = 43;
+	const unsigned short BODY_LENGTH = 9;
+	const unsigned short SESSION_REJECT_REASON = 373;
 
 	// Values for tags
 	const std::string TEST_REQ_ID_VALUE = "123";

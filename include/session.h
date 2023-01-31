@@ -27,6 +27,9 @@ public:
 	void handle_send_test_request();
 	void handle_reject();
 	void handle_resend_request();
+	void handle_message_standard_header(Message& msg);
+	void handle_sequence_reset_gap_fill(Message& msg);
+	void handle_sequence_reset_reset(Message& msg);
 	void handle_logout();
 	void receive_and_handle_message();
 	bool is_session_running();
@@ -38,8 +41,9 @@ private:
 	bool is_session_running_ = false;
 	bool logon_message_received_ = false;
 	bool is_server_, use_boost_ = constants::USE_BOOST;
-	double heartbeat_interval = 1e9;
-	std::chrono::time_point<std::chrono::system_clock> last_received_message_time = std::chrono::system_clock::now();
+	double heartbeat_interval_ = 1e9;
+	bool received_valid_message_;
+	std::chrono::time_point<std::chrono::system_clock> last_received_message_time_ = std::chrono::system_clock::now();
 };
 
 #endif
