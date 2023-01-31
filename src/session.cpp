@@ -73,19 +73,28 @@ void Session::receive_and_handle_message() {
 		handle_resend_request(); //Scenario 8
 		return;
 	}
+	if (msg.get_tag_value(constants::MSG_TYPE) == constants::LOGOUT) {
+		handle_logout(); //Scenario 12 and 13
+		return;
+	}
 	Logger().log_warning(const_cast<char *>("Ingoring message because it is invalid or garbled"));
 }
 
 void Session::handle_logon(Message& msg) {
 	if (msg.get_tag_value(constants::MSG_TYPE) == constants::LOGON) {
 		if (msg.get_tag_value(constants::MSG_SEQ_NUM).to_int() > next_msg_seq_num_) {
-			FixedString fixed_string = MessageFactory().create_resend_request(next_msg_seq_num_, next_msg_seq_num_).serialize();
-			connection_->send_message(fixed_string);
+			FixedString serialized_response = MessageFactory().create_resend_request(next_msg_seq_num_, next_msg_seq_num_).serialize();
+			connection_->send_message(serialized_response);
+			Logger().log_info(const_cast<char*>("Message sent"));
+			Logger().log_info(serialized_response.c_str());
 		}
 		else {
 			logon_message_received_ = true;
 			next_msg_seq_num_ = msg.get_tag_value(constants::MSG_SEQ_NUM).to_int() + 1;
-			connection_->send_message(MessageFactory().create_logon().serialize());
+			FixedString serialized_response = MessageFactory().create_logon().serialize();
+			connection_->send_message(serialized_response);
+			Logger().log_info(const_cast<char*>("Message sent"));
+			Logger().log_info(serialized_response.c_str());
 		}
 	} else if (is_server_ && is_user_duplicated_or_unauthenticated(msg)) {
 		Logger().log_error(const_cast<char*>("duplicated/unauthenticated/non-configured identity"));
@@ -141,20 +150,29 @@ void Session::handle_heart_beat(Message& msg) {
 }
 
 void Session::handle_send_heart_beat_a(Message& msg) {
-	connection_->send_message(MessageFactory().create_heartbeat().serialize());
+	FixedString serialized_response = MessageFactory().create_heartbeat().serialize();
+	connection_->send_message(serialized_response);
+	Logger().log_info(const_cast<char*>("Message sent"));
+	Logger().log_info(serialized_response.c_str());
 	next_msg_seq_num_++;
 	//Accept message
 }
 
 void Session::handle_send_heart_beat_b(Message& msg) {
 	FixedString test_req_id = msg.get_tag_value(constants::TEST_REQ_ID);
-	connection_->send_message(MessageFactory().create_heartbeat_with_test_req_id(test_req_id).serialize());
+	FixedString serialized_response = MessageFactory().create_heartbeat_with_test_req_id(test_req_id).serialize();
+	connection_->send_message(serialized_response);
+	Logger().log_info(const_cast<char*>("Message sent"));
+	Logger().log_info(serialized_response.c_str());
 	next_msg_seq_num_++;
 	//Accept message
 }
 
 void Session::handle_send_test_request() {
-	connection_->send_message(MessageFactory().create_heartbeat_with_test_req_id(constants::TEST_REQ_ID_VALUE).serialize());
+	FixedString serialized_response = MessageFactory().create_heartbeat_with_test_req_id(constants::TEST_REQ_ID_VALUE).serialize();
+	connection_->send_message(serialized_response);
+	Logger().log_info(const_cast<char*>("Message sent"));
+	Logger().log_info(serialized_response.c_str());
 	next_msg_seq_num_++;
 	//Accept message
 }
@@ -165,11 +183,17 @@ void Session::handle_reject() {
 }
 
 void Session::handle_resend_request() {
-	Message response = MessageFactory().create_resend_request(next_msg_seq_num_, next_msg_seq_num_);
-	response.add_field(constants::GAP_FILL_FLAG, "Y");
-	connection_->send_message(response.serialize());
+	FixedString serialized_response = MessageFactory().create_resend_request(next_msg_seq_num_, next_msg_seq_num_).serialize();
+	connection_->send_message(serialized_response);
+	Logger().log_info(const_cast<char*>("Message sent"));
+	Logger().log_info(serialized_response.c_str());
 	next_msg_seq_num_++;
 	//Accept message
+}
+
+void Session::handle_logout() {
+	end();
+	//Accept message and end session
 }
 
 bool Session::is_session_running() {

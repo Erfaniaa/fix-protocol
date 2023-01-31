@@ -27,6 +27,7 @@ public:
 	void handle_send_test_request();
 	void handle_reject();
 	void handle_resend_request();
+	void handle_logout();
 	void receive_and_handle_message();
 	bool is_session_running();
 

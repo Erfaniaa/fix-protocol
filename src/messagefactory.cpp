@@ -37,6 +37,7 @@ Message MessageFactory::create_test_request() {
 Message MessageFactory::create_resend_request(unsigned short begin_seq_num, unsigned short end_seq_num) {
 	Message msg;
 	msg.add_field(constants::MSG_TYPE, constants::RESEND_REQUEST);
+	msg.add_field(constants::GAP_FILL_FLAG, "Y");
 	msg.add_field(constants::BEGIN_SEQ_NUM, std::to_string(begin_seq_num));
 	msg.add_field(constants::END_SEQ_NUM, std::to_string(end_seq_num));
 	return msg;

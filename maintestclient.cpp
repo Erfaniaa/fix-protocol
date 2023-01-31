@@ -22,10 +22,9 @@ int main() {
 	std::thread t(receive_and_log_message, &client_connection);
 	t.join();
 
-	for (int i = 1; i <= 1; i++) {
-		Logger().log_info(const_cast<char*>("Message sent"));
-		Logger().log_info(MessageFactory().create_logon().serialize().c_str());
-		client_connection.send_message(MessageFactory().create_logon().serialize());
-	}
+	FixedString serialized_message = MessageFactory().create_logon().serialize();
+	client_connection.send_message(serialized_message);
+	Logger().log_info(const_cast<char*>("Message sent"));
+	Logger().log_info(serialized_message.c_str());
 	return 0;
 }
