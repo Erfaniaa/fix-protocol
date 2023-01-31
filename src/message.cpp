@@ -63,7 +63,7 @@ FixedString Message::get_tag_value(unsigned short tag) {
 }
 
 FixedString Message::get_checksum() {
-	FixedString serialized_message;
+	FixedString serialized_message = serialize();
 	unsigned short last_index = serialized_message.size();
 	unsigned short sum = 0;
 	if (has_tag(10))

@@ -34,7 +34,7 @@ Message MessageFactory::create_test_request() {
 	return msg;
 }
 
-Message MessageFactory::create_resend_request(unsigned short begin_seq_num, unsigned short end_seq_num) {
+Message MessageFactory::create_resend_request(unsigned int begin_seq_num, unsigned int end_seq_num) {
 	Message msg;
 	msg.add_field(constants::MSG_TYPE, constants::RESEND_REQUEST);
 	msg.add_field(constants::GAP_FILL_FLAG, "Y");
@@ -43,7 +43,7 @@ Message MessageFactory::create_resend_request(unsigned short begin_seq_num, unsi
 	return msg;
 }
 
-Message MessageFactory::create_reject(unsigned short ref_seq_num, const FixedString& ref_tag_id, const FixedString& ref_msg_type) {
+Message MessageFactory::create_reject(unsigned int ref_seq_num, const FixedString& ref_tag_id, const FixedString& ref_msg_type) {
 	Message msg;
 	msg.add_field(constants::MSG_TYPE, constants::REJECT);
 	msg.add_field(constants::REF_SEQ_NUM, std::to_string(ref_seq_num));
@@ -69,7 +69,7 @@ Message MessageFactory::create_new_order_single(const FixedString& clordid, cons
     return msg;
 }
 
-Message MessageFactory::create_sequence_reset(unsigned short new_seq_num, bool gap_fill_flag) {
+Message MessageFactory::create_sequence_reset(unsigned int new_seq_num, bool gap_fill_flag) {
 	Message msg;
 	msg.add_field(constants::MSG_TYPE, constants::SEQUENCE_RESET);
 	msg.add_field(constants::NEW_SEQ_NUM, std::to_string(new_seq_num));
@@ -79,7 +79,7 @@ Message MessageFactory::create_sequence_reset(unsigned short new_seq_num, bool g
 	return msg;
 }
 
-Message MessageFactory::create_order_cancel_request(unsigned short orig_clord_id, unsigned short order_id, unsigned short symbol, unsigned short side) {
+Message MessageFactory::create_order_cancel_request(unsigned int orig_clord_id, unsigned int order_id, unsigned int symbol, unsigned int side) {
 	Message msg;
 	msg.add_field(constants::MSG_TYPE, constants::ORDER_CANCEL_REQUEST);
 	msg.add_field(constants::ORIG_CLORD_ID, std::to_string(orig_clord_id));
@@ -89,7 +89,7 @@ Message MessageFactory::create_order_cancel_request(unsigned short orig_clord_id
 	return msg;
 }
 
-Message MessageFactory::create_order_cancel_reject(unsigned short ref_seq_num, const FixedString& clord_id, const FixedString& orig_clord_id, const FixedString& text) {
+Message MessageFactory::create_order_cancel_reject(unsigned int ref_seq_num, const FixedString& clord_id, const FixedString& orig_clord_id, const FixedString& text) {
 	Message msg;
 	msg.add_field(constants::MSG_TYPE, constants::ORDER_CANCEL_REJECT);
 	msg.add_field(constants::REF_SEQ_NUM, std::to_string(ref_seq_num));
