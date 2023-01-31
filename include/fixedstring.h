@@ -19,7 +19,7 @@ public:
 	~FixedString();
 	FixedString(const std::string& str);
 	FixedString(const char* str);
-	FixedString(unsigned short x);
+	FixedString(unsigned int x);
 	void push_back(const char& value);
 	void pop_back();
 	std::size_t size() const;
@@ -27,7 +27,7 @@ public:
 	const char& operator[](std::size_t index) const;
 	FixedString& operator=(const char* str);
 	FixedString& operator=(const FixedString& other);
-	FixedString& operator=(const unsigned short x);
+	FixedString& operator=(unsigned int x);
 	void operator=(const std::string& str);
 	bool operator==(const FixedString& other) const;
 	bool operator==(const std::string& other) const;

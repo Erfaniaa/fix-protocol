@@ -27,7 +27,7 @@ FixedString::FixedString(const char* str) {
 	data_[size_] = '\0';  // Terminate the string with a null character. 
 }
 
-FixedString::FixedString(unsigned short x) {
+FixedString::FixedString(unsigned int x) {
 	std::stringstream ss;
 	std::string str;
 	ss << x;
@@ -197,7 +197,7 @@ FixedString& FixedString::operator=(const FixedString& other) {
 	return *this;
 }
 
-FixedString& FixedString::operator=(const unsigned short x) {
+FixedString& FixedString::operator=(unsigned int x) {
 	std::stringstream ss;
 	std::string str;
 	ss << x;
