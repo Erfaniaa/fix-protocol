@@ -45,7 +45,7 @@ void ClientConnection::send_message(FixedString message) {
 
 FixedString ClientConnection::receive_message() {
 	char buffer[constants::MAX_MESSAGE_LENGTH + 1] = { 0 };
-	read(new_socket, buffer, constants::MAX_MESSAGE_LENGTH + 1);
+	std::size_t read_size = read(new_socket, buffer, constants::MAX_MESSAGE_LENGTH + 1);
 	return buffer;
 }
 
