@@ -77,7 +77,7 @@ FixedVector<T>& FixedVector<T>::operator=(const FixedVector<T>& other) {
 		data_[i] = other.data_[i]; 
 	} 
 
-	return this; 
+	return *this; 
 }
 
 template <typename T> 
