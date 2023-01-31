@@ -97,8 +97,8 @@ namespace constants {
 	const std::string TARGET_LOC_ID_VALUE = "222";
 
 	// Delimiter
-	const std::string SOH = "\x01";
-	// const std::string SOH = "|";
+	// const std::string SOH = "\x01";
+	const std::string SOH = "|";
 
 	// Socket
 	const std::string HOST = "127.0.0.1";
