@@ -3,7 +3,7 @@
 
 Session::Session(bool is_server) {
 	is_server_ = is_server;
-	if (use_boost_) {
+	if constexpr (use_boost_) {
 		if (is_server_)
 			connection_ = std::make_unique<BoostServerConnection>();
 		else
