@@ -111,13 +111,13 @@ namespace constants {
 	const unsigned short MAX_TAGS_COUNT = 1024;
 
 	// Logger config
-	const bool LOG_GENERAL_MESSAGES = true;
-	const bool LOG_INFO = true;
-	const bool LOG_WARNINGS = true;
-	const bool LOG_ERRORS = true;
+	constexpr bool LOG_GENERAL_MESSAGES = true;
+	constexpr bool LOG_INFO = true;
+	constexpr bool LOG_WARNINGS = true;
+	constexpr bool LOG_ERRORS = true;
 
 	// Use Boost socket library
-	const bool USE_BOOST = false;
+	constexpr bool USE_BOOST = false;
 }
 
 #endif
