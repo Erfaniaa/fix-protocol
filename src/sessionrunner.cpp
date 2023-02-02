@@ -2,12 +2,7 @@
 
 
 SessionRunner::SessionRunner(bool is_server) {
-	session_ = new Session(is_server);
-}
-
-SessionRunner::~SessionRunner() {
-	if (session_ != NULL)
-		delete session_;
+	session_ = std::make_unique<Session>(is_server);
 }
 
 void SessionRunner::run() {

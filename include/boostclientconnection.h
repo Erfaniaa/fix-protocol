@@ -1,6 +1,7 @@
 #ifndef BOOST_CLIENT_CONNECTION_H
 #define BOOST_CLIENT_CONNECTION_H
 
+#include <memory>
 #include <boost/asio.hpp>
 #include "connection.h"
 #include "fixedstring.h"
@@ -11,8 +12,9 @@
 class BoostClientConnection: public Connection {
 
 public:
-	BoostClientConnection();
-	~BoostClientConnection();
+	BoostClientConnection() = default;
+	~BoostClientConnection() = default;
+
 	void open_connection();
 	void close_connection();
 	void send_message(FixedString message);
@@ -22,7 +24,7 @@ public:
 private:
 	const FixedString host = constants::HOST;
 	const int port = constants::PORT;
-	boost::asio::ip::tcp::socket *new_socket = NULL;
+	std::unique_ptr<boost::asio::ip::tcp::socket> new_socket;
 	boost::asio::detail::socket_type client_fd = 0;
 };
 

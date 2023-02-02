@@ -9,8 +9,8 @@
 
 class BoostServerConnection: public Connection {
 public:
-	BoostServerConnection();
-	~BoostServerConnection();
+	BoostServerConnection() = default;
+	~BoostServerConnection() = default;
 	void open_connection();
 	void close_connection();
 	void send_message(FixedString message);
@@ -19,7 +19,7 @@ public:
 
 private:
 	const unsigned short port = constants::PORT;
-	boost::asio::ip::tcp::socket *new_socket = NULL;
+	std::unique_ptr<boost::asio::ip::tcp::socket> new_socket;
 };
 
 #endif
