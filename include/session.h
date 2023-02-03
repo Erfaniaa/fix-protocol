@@ -41,7 +41,8 @@ private:
 	unsigned int next_msg_seq_num_ = 0;
 	bool is_session_running_ = false;
 	bool logon_message_received_ = false;
-	bool is_server_, use_boost_ = constants::USE_BOOST;
+	bool is_server_;
+	static constexpr bool use_boost_ = constants::USE_BOOST;
 	double heartbeat_interval_ = 1e9;
 	bool received_valid_message_;
 	std::chrono::time_point<std::chrono::system_clock> last_received_message_time_ = std::chrono::system_clock::now();
