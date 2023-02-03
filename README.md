@@ -65,4 +65,4 @@ Source: [AQUAQ Analytics](https://aquaq.co.uk/kdb-fix-adapter/)
 
 - Handle the 14th scenario of [FIX Protocol 4.4 testcases](https://www.fixtrading.org/standards/fix-session-testcases-online/).
 - Separate configuration constants from FIX protocol constants. Don't store everything in a single `include/constants.h` file.
-- Use smart_ptr and move semantics to improve efficiency.
+- Use move semantics to improve efficiency.

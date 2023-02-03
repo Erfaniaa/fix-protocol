@@ -1,13 +1,6 @@
 #include "../include/boostclientconnection.h"
 
 
-BoostClientConnection::BoostClientConnection() {}
-
-BoostClientConnection::~BoostClientConnection() {
-	if (new_socket != NULL)
-		delete new_socket;
-}
-
 void BoostClientConnection::open_connection() {
 	boost::asio::io_service io_service;
 
@@ -16,8 +9,9 @@ void BoostClientConnection::open_connection() {
 	boost::asio::ip::tcp::resolver::query query(host.c_str(), std::to_string(port));
 	boost::asio::ip::tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
 
-	// Try each endpoint until we successfully establish a connection. 
-	new_socket = new boost::asio::ip::tcp::socket(io_service);
+	// Try each endpoint until we successfully establish a connection.
+	new_socket = std::make_unique<boost::asio::ip::tcp::socket>(io_service);
+//	new_socket = new boost::asio::ip::tcp::socket(io_service);
 
 	try {
 		boost::asio::connect(*new_socket, endpoint_iterator);
